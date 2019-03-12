@@ -66,7 +66,7 @@ const typeDefs = gql`
   type Query {
     books: [Book]
     users: [User]
-    queryResult: QueryResult
+    #queryResult: QueryResult
   }
 
   # type Mutation {
