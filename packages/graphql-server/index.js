@@ -74,13 +74,11 @@ const typeDefs = gql`
   # }
 `;
 
-function makeQuery(query) {
-  return query;
-}
+
 
 // Resolvers define the technique for fetching the types in the
 // schema.  We'll retrieve books from the "books" array above.
-const graphqlApi = new QueryGraphQLAPI();
+// const graphqlApi = new QueryGraphQLAPI();
 const resolvers = {
   Query: {
     books: () => books,
