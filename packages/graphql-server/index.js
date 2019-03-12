@@ -22,18 +22,18 @@ const users = [
   }
 ];
 
-class QueryGraphQLAPI extends GraphQLDataSource {
-  baseURL = 'https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/graphql';
+// class QueryGraphQLAPI extends GraphQLDataSource {
+//   baseURL = 'https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/graphql';
  
-  async getGraphqlQuery(graphqlQuery) {
-    try {
-      const response = await this.query(gql `${graphqlQuery}`);
-      return JSON.stringify(response.data);
-    } catch (error) {
-      console.error("logging error",error);
-    }
-  }
-}
+//   async getGraphqlQuery(graphqlQuery) {
+//     try {
+//       const response = await this.query(gql `${graphqlQuery}`);
+//       return JSON.stringify(response.data);
+//     } catch (error) {
+//       console.error("logging error",error);
+//     }
+//   }
+// }
 
 
 
@@ -53,13 +53,13 @@ const typeDefs = gql`
     age: Int
   }
 
-  type QueryResult {
-    queryResult: String
-  }
+  # type QueryResult {
+  #   queryResult: String
+  # }
 
-  type GraphqlQuery {
-    query: String
-  }
+  # type GraphqlQuery {
+  #   query: String
+  # }
 
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
@@ -69,9 +69,9 @@ const typeDefs = gql`
     queryResult: QueryResult
   }
 
-  type Mutation {
-   queryData(query : String!): QueryResult
-  }
+  # type Mutation {
+  #  queryData(query : String!): QueryResult
+  # }
 `;
 
 function makeQuery(query) {
@@ -88,18 +88,18 @@ const resolvers = {
 
   },
 
-  Mutation: {
-    queryData: async (parent, { query }) => {
-      try {
-        const result = await graphqlApi.getGraphqlQuery(query);
-        return {queryResult: result};
-      }
-      catch(error) {
-        console.log("error resolving", error);
-      }
+  // Mutation: {
+  //   queryData: async (parent, { query }) => {
+  //     try {
+  //       const result = await graphqlApi.getGraphqlQuery(query);
+  //       return {queryResult: result};
+  //     }
+  //     catch(error) {
+  //       console.log("error resolving", error);
+  //     }
       
-    }
-  }
+  //   }
+  // }
 };
 
 // In the most basic sense, the ApolloServer can be started
