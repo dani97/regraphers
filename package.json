@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "yarn workspace graphql-server run build",
-    "watch:frontend": "yarn workspace graphql-hackers run start; cd - >/dev/null",
+    "watch:frontend": "yarn workspace graphql-hackers run dev; cd - >/dev/null",
     "watch:backend": "yarn workspace graphql-server run start; cd - >/dev/null"
   },
   "engines": {
