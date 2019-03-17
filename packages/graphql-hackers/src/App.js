@@ -36,7 +36,7 @@ const App = () => {
     
     return (
         <ApolloProvider client = {client}>
-            <p>This is Graphql hackers</p>
+            <p >This is Graphql hackers</p>
             <DocExplorer schema = {schema}> </DocExplorer>
         </ApolloProvider>
     );
