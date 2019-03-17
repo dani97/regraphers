@@ -8,11 +8,16 @@ module.exports = {
 		path.join(__dirname, '../index.js')
     ],
     module: {
-		rules: [{
-			test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: 'babel-loader'
-			}
+		rules: [
+            {
+                test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use: 'babel-loader'
+            },
+            {
+                test: /\.css$/, 
+                use: "css-loader"
+            }
 		]
     },
     output: {
