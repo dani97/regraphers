@@ -3,7 +3,10 @@ import introspectionQuery from '../introspectionQuery';
 import { gql } from 'apollo-server';
 
 class QueryGraphQLAPI extends GraphQLDataSource {
-  baseURL = 'https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/graphql';
+  constructor() {
+        super();
+  	this.baseURL = "https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/graphql";
+  }
  
   async getGraphqlQuery(graphqlQuery) {
     try {

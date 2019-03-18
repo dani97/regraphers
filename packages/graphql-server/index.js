@@ -1,4 +1,5 @@
-import { ApolloServer, gql } from  'apollo-server';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 
 import typeDefs from './schema/index';
 import resolvers from './resolvers/index';
@@ -13,8 +14,10 @@ const server = new ApolloServer({
     }
   });
 
-// This `listen` method launches a web-server.  Existing apps
-// can utilize middleware options, which we'll discuss later.
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+const app = express();
+server.applyMiddleware({app});
+
+// Initiate the server
+app.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });

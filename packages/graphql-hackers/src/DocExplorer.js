@@ -14,6 +14,7 @@ import SchemaDoc from './DocExplorer/SchemaDoc';
 import SearchBox from './DocExplorer/SearchBox';
 import SearchResults from './DocExplorer/SearchResults';
 import TypeDoc from './DocExplorer/TypeDoc';
+import './doc-explorer.css';
 
 const initialNav = {
   name: 'Schema',
