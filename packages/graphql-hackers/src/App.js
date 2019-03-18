@@ -8,7 +8,7 @@ import { DocExplorer } from './DocExplorer';
 import './app.css';
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000"
+  uri: "https://graphql-hackers.now.sh/"
 });
 
 const introspectionQuery = gql`
