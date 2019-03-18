@@ -3,7 +3,7 @@ Graphql project for zilker hack fest
 
 clone the project 
 
-run yarn install
+run `yarn install`
 
 ## To run the project
 
