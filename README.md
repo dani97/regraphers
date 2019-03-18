@@ -7,7 +7,7 @@ run yarn install
 
 ## To run the project
 
-run yarn watch:backend (watching backend application)
+run `yarn watch:backend` (watching backend application)
 
 In separate console 
-run yarn watch:frontend (watching frontend application)
+run `yarn watch:frontend` (watching frontend application)
