@@ -15,9 +15,12 @@
     "markdown-it": "^8.4.2",
     "react": "^16.8.4",
     "react-apollo": "^2.5.2",
+    "react-checkbox-tree": "^1.5.1",
+    "react-dnd": "^7.4.3",
     "react-dom": "^16.8.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-sortable-tree": "^2.6.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-dev-server": "^3.2.1"

@@ -3,3 +3,4 @@ yarn-error.log
 assets
 uploads
 packages/graphql-hackers/dist
+.idea/
