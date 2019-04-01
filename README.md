@@ -11,3 +11,7 @@ run `yarn watch:backend` (watching backend application)
 
 In separate console 
 run `yarn watch:frontend` (watching frontend application)
+
+## TO add dependencies
+
+run `yarn workspace <workspace-name> add <dependency-name>`  
