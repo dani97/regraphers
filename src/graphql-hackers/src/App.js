@@ -8,7 +8,8 @@ import { DocExplorer } from './DocExplorer';
 import './app.css';
 import 'react-sortable-tree/style.css';
 import TreeCheckBox from './TreeCheckBox';
-import QueryViewer from './QueryViewer';
+import QueryViewer from '../../components/QueryViewer';
+import QueryArguments from "./QueryArguments";
 
 const client = new ApolloClient({
   uri: "http://127.0.0.1:4000/"
@@ -69,9 +70,10 @@ function createSchemaTree(schema, schemaTree, field, parentName = '') {
             const interfaceNode = field.type.ofType;
             const fields = schema[interfaceNode.name].fields;
             schemaTree[schemaTree.length-1].children = [];
-            console.log(name,schemaTree);
-            for(const innerField of fields) {
-                createSchemaTree(schema, schemaTree[schemaTree.length - 1].children, innerField, name);
+            if(fields) {
+                for (const innerField of fields) {
+                    createSchemaTree(schema, schemaTree[schemaTree.length - 1].children, innerField, name);
+                }
             }
         }
          catch (e) {
@@ -106,12 +108,24 @@ function createTypesObject(schema) {
 }
 
 
+function formatArg(types) {
+    try {
+        const queryType = types['Query'].fields.find((type) => {
+            return (type.name == 'products')});
+
+        return queryType.args;
+    }
+    catch (e) {
+        return null;
+    }
+}
+
 const App = () => {
     let [schema, setSchema] = useState(null);
     let [clientSchema, setClientSchema] = useState(null);
     let [treeData, setTreeData] = useState([]);
     let [query, setQuery] = useState({});
-
+    let [arg , setArg] = useState([]);
     function formatQueryToTree(query) {
         let queryJson = {}
         query.forEach(queryLine => {
@@ -134,10 +148,12 @@ const App = () => {
     useEffect(() => {
         if(schema) {
             const typesObject = createTypesObject(schema);
+            setArg(formatArg(typesObject));
             setTreeData(formatSchemaToTree(typesObject));
             setClientSchema(buildClientSchema(schema));
         }
     }, [schema]);
+
 
     return (
         <ApolloProvider client = {client}>
@@ -147,6 +163,7 @@ const App = () => {
                 handleQueryChange={(query) => {formatQueryToTree(query)}}
             />
             <QueryViewer query = {query}/>
+            <QueryArguments args={arg}/>
         </ApolloProvider>
     );
 }

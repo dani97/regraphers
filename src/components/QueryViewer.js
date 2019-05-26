@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import { jsonToGraphQLQuery } from 'json-to-graphql-query'
+import { jsonToGraphQLQuery } from 'json-to-graphql-query';
 
 const QueryViewer = (props) => {
     let queryHtml = !(Object.keys(props.query).length === 0

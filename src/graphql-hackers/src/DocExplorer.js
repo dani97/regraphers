@@ -24,11 +24,11 @@ const initialNav = {
 /**
  * DocExplorer
  *
- * Shows documentations for graphQL definitions from the schema.
+ * Shows documentations for GraphQL definitions from the schema.
  *
  * Props:
  *
- *   - schema: A required GraphQLSchema instance that provides graphQL document
+ *   - schema: A required GraphQLSchema instance that provides GraphQL document
  *     definitions.
  *
  * Children:
