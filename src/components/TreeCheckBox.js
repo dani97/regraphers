@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import CheckboxTree from 'react-checkbox-tree';
+import CheckboxTree from 'react-checkbox-tree/src/index';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
 const nodes = [

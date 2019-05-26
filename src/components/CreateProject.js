@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateProjectName, updateEndPoint, createProject } from "../Reducers/reducers";
-import { bindActionCreators } from "redux";
+import { saveProject } from "../actions/project";
 
 const CreateProject = (props) => {
     /**
@@ -9,46 +9,58 @@ const CreateProject = (props) => {
      * access inside a Router Component, match, location, history, staticContext
      */
     console.log('props are ',props);
+
+    /**
+     * Sets projectName and endPoint as local state for
+     * CreateProject Component
+     */
+    let [projectName, setProjectName] = useState('');
+    let [endPoint, setEndPoint] = useState('');
+
     const handleProjectNameChange = (event) => {
-        console.log('project name :', event.target.value);
-        props.updateProjectName(event.target.value);
+        /**
+         * To change the state of the variable declared use the
+         * setters for the state
+         */
+        setProjectName(event.target.value);
     }
-
     const handleEndPointChange = (event) => {
-        console.log('end point :', event.target.value);
-        props.updateEndPoint(event.target.value);
+        setEndPoint(event.target.value);
     }
 
-    const createProject = (event) => {
-        console.log('event :', event);
+    const saveProject = (event) => {
         event.preventDefault();
-
-        props.createProject({
+        props.saveProject({
             id: new Date().getTime(),
-            projectName: props.projectName,
-            endPoint: props.endPoint
+            projectName: projectName,
+            endPoint: endPoint
         });
 
     }
-    console.log('in create project');
+    /**
+     * Value assigned for input types are the state values of the CreateProject Component
+     */
     return (
         <div>
             <h2>Create New Project</h2>
-            <form onSubmit={createProject}>
+            <form onSubmit={saveProject}>
                 <div className={'control'}>
                     <label className={'project-name'}>
                         Project Name
                     </label>
-                    <input type={'text'} value={props.projectName} onChange={handleProjectNameChange}/>
+                    <input type={'text'} value={projectName} onChange={handleProjectNameChange}/>
                 </div>
                 <div className={'control'}>
                     <label className={'end-point'}>
                         End Point
                     </label>
-                    <input type={'text'} value={props.endPoint} onChange={handleEndPointChange}/>
+                    <input type={'text'} value={endPoint} onChange={handleEndPointChange}/>
                 </div>
                 <input type={'submit'} value={"Create"}/>
             </form>
+            <h3>
+                <Link to={"/queryBuilder"}>Go to Step 3</Link>
+            </h3>
         </div>
     )
 }
@@ -59,9 +71,6 @@ const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(CreateProject)
 export default ConnectedApp;*/
 
 export default connect(
-    (state) => ({
-        projectName: state.project.projectName,
-        endPoint: state.project.endPoint
-    }),
-    {updateProjectName, updateEndPoint, createProject}
+    (state) => ({}),
+    {saveProject}
 )(CreateProject);

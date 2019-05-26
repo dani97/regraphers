@@ -1,5 +1,5 @@
 import React from 'react';
-import QueryIntrospectionSchema from '../GraphQL/QueryIntrospectionSchema';
+import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import {graphql, compose} from "react-apollo";
 
 const App = (props) => {
