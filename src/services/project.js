@@ -2,10 +2,13 @@ import { AwsClient } from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import {buildClientSchema} from "graphql";
 
-export const getIntrospectionSchema = () => {
+export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
         query: QueryIntrospectionSchema,
-        fetchPolicy: "cache-first"
+        variables: {
+            endPoint: endPoint
+        },
+        fetchPolicy: "cache-only"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }

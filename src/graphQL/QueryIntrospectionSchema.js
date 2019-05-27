@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const QueryIntrospectionSchema = gql`
-    query introspectionSchema {
-        getIntrospectionSchema(endPoint: "https://release-dev-231-npzdaky-zddsyhrdimyra.us-4.magentosite.cloud/graphql") 
+    query introspectionSchema($endPoint: String!) {
+        getIntrospectionSchema(endPoint: $endPoint) 
     }
 `;
 

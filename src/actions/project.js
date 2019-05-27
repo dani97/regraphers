@@ -8,7 +8,7 @@ export const saveProject = (project) => {
      * provided is valid
      */
     return(dispatch) => {
-        getIntrospectionSchema()
+        getIntrospectionSchema(project.endPoint)
             .then(schema => dispatch(createProject(project, schema)),
                   error => {
                     console.log('this is error ', error);
