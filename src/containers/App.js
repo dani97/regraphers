@@ -13,7 +13,6 @@ const App = () => {
             <Switch>
                 <Route exact path={"/"} component={ProjectGrid} />
                 <Route path={"/projects"} component={ProjectGrid} />
-                <Route exact path={"/create"} render={() => <CreateProject/>} />
                 <Route exact path={"/queryBuilder"} render={() => <QueryBuilder/>} />
                 <Route exact path={"/page"} component={Page} />
             </Switch>

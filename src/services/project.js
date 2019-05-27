@@ -5,7 +5,7 @@ import {buildClientSchema} from "graphql";
 export const getIntrospectionSchema = () => {
     return AwsClient.query({
         query: QueryIntrospectionSchema,
-        fetchPolicy: "cache-only"
+        fetchPolicy: "cache-first"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }

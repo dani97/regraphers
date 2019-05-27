@@ -37,6 +37,11 @@ const CreateProject = (props) => {
         });
 
     }
+
+    const closeModal = (event) => {
+        console.log('into close modal');
+        props.closeModal();
+    }
     /**
      * Value assigned for input types are the state values of the CreateProject Component
      */
@@ -56,7 +61,8 @@ const CreateProject = (props) => {
                     </label>
                     <input type={'text'} value={endPoint} onChange={handleEndPointChange}/>
                 </div>
-                <input type={'submit'} value={"Create"}/>
+                <input type={'submit'} value={'Save'}/>
+                <button type={'button'} onClick={closeModal}>Cancel</button>
             </form>
             <h3>
                 <Link to={"/queryBuilder"}>Go to Step 3</Link>
