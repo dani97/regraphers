@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Modal from 'react-awesome-modal';
 import CreateProject from "./CreateProject";
 
-const ProjectGrid = () => {
+const ProjectGrid = (props) => {
+console.log('props in project grid is ', props);
 
     let [visible, setVisible] = useState(false);
 
@@ -18,7 +19,7 @@ const ProjectGrid = () => {
         <div>
             <button onClick={onOpenModal}>Create a New Project</button>
             <Modal visible={visible} width="400" height="300" effect="fadeInUp" onClickAway={onCloseModal}>
-                <CreateProject closeModal={onCloseModal}/>
+                <CreateProject closeModal={onCloseModal} routerProps={props}/>
             </Modal>
         </div>
     )

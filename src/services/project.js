@@ -8,7 +8,7 @@ export const getIntrospectionSchema = (endPoint) => {
         variables: {
             endPoint: endPoint
         },
-        fetchPolicy: "cache-only"
+        fetchPolicy: "cache-first"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
