@@ -30,11 +30,15 @@ const CreateProject = (props) => {
 
     const saveProject = (event) => {
         event.preventDefault();
+        let routerProps = (props.routerProps)
+                            ? props.routerProps
+                            : null;
+        console.log('router props are ', routerProps);
         props.saveProject({
             id: new Date().getTime(),
             projectName: projectName,
             endPoint: endPoint
-        });
+        }, routerProps);
 
     }
 

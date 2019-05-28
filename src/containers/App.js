@@ -10,6 +10,7 @@ import store from '../store';
 const App = () => {
     return (
         <Provider store={store}>
+            <h2>This the header section</h2>
             <Switch>
                 <Route exact path={"/"} component={ProjectGrid} />
                 <Route path={"/projects"} component={ProjectGrid} />
