@@ -1,6 +1,7 @@
 import { AwsClient } from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import {buildClientSchema} from "graphql";
+import {CreateEndPointOperation} from "../graphQL/EndPointOperation";
 
 export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
@@ -9,6 +10,28 @@ export const getIntrospectionSchema = (endPoint) => {
             endPoint: endPoint
         },
         fetchPolicy: "cache-first"
+    })
+        .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
+}
+
+export const createEndPointOperation = (CreateEndPointInput) => {
+    return AwsClient.mutate({
+        mutation: CreateEndPointOperation,
+        variables: {
+            input: CreateEndPointInput
+        },
+        fetchPolicy: "no-cache"
+    })
+        .then((response) => response.data['createEndPointOperation']);
+}
+
+export const saveEndPointOperation = (endPoint) => {
+    return AwsClient.query({
+        query: QueryIntrospectionSchema,
+        variables: {
+            endPoint: endPoint
+        },
+        fetchPolicy: "cache-only"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
@@ -49,6 +72,10 @@ const formatSchemaToTree = (schemaType) => {
 
     return schemaTree;
 }
+const checkInfRecursion = (parentname , name) => {
+    const listName = parentname.split("-");
+    return listName.indexOf(name) != -1;
+}
 
 const createSchemaTree = (schema, schemaTree, field, parentName = '') => {
     const hasRecursion = checkInfRecursion(parentName, field.name);
@@ -85,11 +112,6 @@ const createSchemaTree = (schema, schemaTree, field, parentName = '') => {
         }
     }
     return;
-}
-
-const checkInfRecursion = (parentname , name) => {
-    const listName = parentname.split("-");
-    return listName.indexOf(name) != -1;
 }
 
 const createTypesObject = (schema) => {
