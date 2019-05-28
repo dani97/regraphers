@@ -1,6 +1,9 @@
 import { getIntrospectionSchema } from "../services/project";
+import { ERROR_TYPE, getMessage } from "../services/message";
+import { showMessage } from "./message";
 
 export const CREATE_PROJECT = 'CREATE_PROJECT';
+export const ENDPOINT_ERROR_MESSAGE = 'Invalid endpoint';
 
 export const saveProject = (project, routerProps) => {
     /**
@@ -18,6 +21,7 @@ export const saveProject = (project, routerProps) => {
                 },
                   error => {
                     console.log('this is error ', error);
+                    dispatch(showMessage(getMessage(ENDPOINT_ERROR_MESSAGE, ERROR_TYPE)));
                   });
     }
 };

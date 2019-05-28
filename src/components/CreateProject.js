@@ -68,9 +68,6 @@ const CreateProject = (props) => {
                 <input type={'submit'} value={'Save'}/>
                 <button type={'button'} onClick={closeModal}>Cancel</button>
             </form>
-            <h3>
-                <Link to={"/queryBuilder"}>Go to Step 3</Link>
-            </h3>
         </div>
     )
 }

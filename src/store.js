@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, combineReducers , compose} from "redux";
 import thunk from 'redux-thunk';
 import { project } from './reducers/project';
+import { message} from "./reducers/message";
 
 const reducers = combineReducers({
-    project: project
+    project: project,
+    messages: message
 })
 
 /**
