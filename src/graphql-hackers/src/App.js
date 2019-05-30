@@ -8,11 +8,12 @@ import { DocExplorer } from './DocExplorer';
 import './app.css';
 import 'react-sortable-tree/style.css';
 import TreeCheckBox from './TreeCheckBox';
-import QueryViewer from '../../components/QueryViewer';
-import QueryArguments from "./QueryArguments";
+import QueryViewer from './QueryViewer';
+
+import QueryTester from './QueryTester';
 
 const client = new ApolloClient({
-  uri: "http://127.0.0.1:4000/"
+  uri: process.env.API_END_POINT
 });
 
 const introspectionQuery = gql`
@@ -163,7 +164,7 @@ const App = () => {
                 handleQueryChange={(query) => {formatQueryToTree(query)}}
             />
             <QueryViewer query = {query}/>
-            <QueryArguments args={arg}/>
+            <QueryTester args={arg}/>
         </ApolloProvider>
     );
 }

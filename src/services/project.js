@@ -36,10 +36,40 @@ export const saveEndPointOperation = (endPoint) => {
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
 
-export const getTreeData = (schema) => {
-    return (schema)
-        ? formatSchemaToTree(createTypesObject(schema))
-        : [];
+export const createTypesObject = (schema) => {
+    if(!schema) return {};
+    const fields = schema.__schema.types;
+    const typesObject = fields.reduce((obj,item) => {
+        obj[item.name] = item;
+        return obj;
+    }, {});
+    return typesObject;
+}
+
+export const formatArg = (types) => {
+    try {
+        const queryType = types['Query'].fields.find((type) => {
+            return (type.name == 'products')});
+
+        return queryType.args;
+    }
+    catch (e) {
+        return null;
+    }
+}
+
+export const formatSchemaToTree = (schemaType) => {
+    if(schemaType === null || schemaType ==  {} ) {
+        return [];
+    }
+    console.log("schema type", schemaType);
+    let fields = schemaType['Products'].fields;
+    const schemaTree = [];
+    for (const field of fields) {
+        createSchemaTree(schemaType, schemaTree, field, 'products');
+    }
+
+    return schemaTree;
 }
 
 export const buildQuery = (queryLine , queryJson) => {
@@ -59,19 +89,6 @@ export const buildQuery = (queryLine , queryJson) => {
     });
 }
 
-const formatSchemaToTree = (schemaType) => {
-    if(schemaType === null || schemaType ==  {} ) {
-        return [];
-    }
-    console.log("schema type", schemaType);
-    let fields = schemaType['Products'].fields;
-    const schemaTree = [];
-    for (const field of fields) {
-        createSchemaTree(schemaType, schemaTree, field, 'products');
-    }
-
-    return schemaTree;
-}
 const checkInfRecursion = (parentname , name) => {
     const listName = parentname.split("-");
     return listName.indexOf(name) != -1;
@@ -112,14 +129,4 @@ const createSchemaTree = (schema, schemaTree, field, parentName = '') => {
         }
     }
     return;
-}
-
-const createTypesObject = (schema) => {
-    if(!schema) return {};
-    const fields = schema.__schema.types;
-    const typesObject = fields.reduce((obj,item) => {
-        obj[item.name] = item;
-        return obj;
-    }, {});
-    return typesObject;
 }

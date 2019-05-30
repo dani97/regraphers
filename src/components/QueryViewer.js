@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { jsonToGraphQLQuery } from 'json-to-graphql-query';
 import { createEndPointOperation} from "../services/project";
 import {connect} from "react-redux";
+import Modal from "react-awesome-modal";
+import Message from "./Message";
+import CreateProject from "./CreateProject";
+import QueryTester from './QueryTester';
 
 const QueryViewer = (props) => {
+
+    console.log('props are ', props);
     let queryHtml = !(Object.keys(props.query).length === 0
         && props.query.constructor === Object) ?
         jsonToGraphQLQuery(props.query, {pretty: true}): '';
-    function handleTest() {
-        alert("button clicked");
+
+    let [visible, setVisible] = useState(false);
+
+    const onOpenModal = () => {
+        setVisible(true);
     }
 
-    function handleSave() {
+    const onCloseModal= () => {
+        setVisible(false);
+    }
+
+    const handleSave = () => {
         console.log("query to be saved" , props.query);
         const payload = {
                 "endpoint": props.endPoint+'/',
@@ -25,7 +38,11 @@ const QueryViewer = (props) => {
     return (
         <div>
             <pre dangerouslySetInnerHTML={{__html: queryHtml}}></pre>
-            <button onClick={handleTest}> Test </button>
+            <button onClick={onOpenModal}> Test </button>
+            <Modal visible={visible} width="400" height="300" effect="fadeInUp" onClickAway={onCloseModal}>
+                <Message/>
+                <QueryTester closeModal={onCloseModal} args={props.args}/>
+            </Modal>
             <button onClick={handleSave}> save </button>
         </div>
     )
