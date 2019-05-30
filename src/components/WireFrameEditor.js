@@ -25,7 +25,6 @@ const Container = styled.div`
   transform-origin: top left;
 
   animation: ${fadeInScale} 0.31s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  overflow: hidden;
 `
 
 function WireFrameEditor (props) {
@@ -44,16 +43,21 @@ function WireFrameEditor (props) {
             }}
         >
             <TextEditor
-                onChange={e => props.onChange({
+                onChange={value => props.onChange({
                     ...props.annotation,
                     data: {
                         ...props.annotation.data,
-                        text: e.target.value
+                        text: value
                     }
                 })}
-                onSubmit={props.onSubmit}
+                onSubmit={value => props.onSubmit({
+                    ...props.annotation,
+                    data: {
+                        ...props.annotation.data,
+                        text: value
+                    }
+                })}
                 value={props.annotation.data && props.annotation.data.text}
-                queryPath={props.queryPath}
             />
         </Container>
     )

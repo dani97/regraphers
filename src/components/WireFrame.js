@@ -10,15 +10,17 @@ class WireFrame extends Component {
     }
 
     onChange = (annotation) => {
+        console.log('on change value is ', annotation);
         this.setState({ annotation })
     }
 
     onSubmit = (annotation) => {
+        console.log('annotation ', annotation);
         const { geometry, data } = annotation
 
         this.setState({
             annotation: {},
-            activeAnnotations: this.state.annotations.concat({
+            annotations: this.state.annotations.concat({
                 geometry,
                 data: {
                     ...data,
@@ -27,8 +29,6 @@ class WireFrame extends Component {
             })
         })
     }
-
-    queryPath = ['nithya', '20'];
 
     render () {
         console.log('props in app ', this.state);
@@ -42,9 +42,8 @@ class WireFrame extends Component {
                 onChange={this.onChange}
                 onSubmit={this.onSubmit}
                 renderEditor={() => (<WireFrameEditor annotation={this.state.annotation}
-                                                    onChange={this.onChange}
-                                                    onSubmit={this.onSubmit}
-                                                    queryPath={this.queryPath}/>
+                                                      onChange={this.onChange}
+                                                      onSubmit={this.onSubmit}/>
                 )}/>
         )
     }

@@ -1,9 +1,11 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import Autosuggest from 'react-autosuggest';
+import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
+import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
+import '../styles/TextEditor.css';
 
 const Inner = styled.div`
-  padding: 8px 16px;
-
   textarea {
     border: 0;
     font-size: 14px;
@@ -33,29 +35,130 @@ const Button = styled.div`
     background: #eeeeee;
   }
 `
+const people = [
+    {
+        first: 'Charlie',
+        last: 'Brown',
+        twitter: 'dancounsell'
+    },
+    {
+        first: 'Charlotte',
+        last: 'White',
+        twitter: 'mtnmissy'
+    },
+    {
+        first: 'Chloe',
+        last: 'Jones',
+        twitter: 'ladylexy'
+    },
+    {
+        first: 'Cooper',
+        last: 'King',
+        twitter: 'steveodom'
+    }
+];
 
-function TextEditor (props) {
-    let querypath = props.queryPath,
-        index = 0;
-  return (
-    <React.Fragment>
-      <Inner>
-        <div>
-            {props.queryPath.map(query => (
-                <h3 key={index++}>{query}</h3>
-            ))}
-        </div>
+const escapeRegexCharacters = (str) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
-      </Inner>
-      {props.value && (
-        <Button
-          onClick={props.onSubmit}
-        >
-          Submit
-        </Button>
-      )}
-    </React.Fragment>
-  )
+const renderSuggestion = (suggestion, { query }) => {
+    console.log('into render suggestion ', suggestion);
+    const suggestionText = `${suggestion.first} ${suggestion.last}`;
+    const matches = AutosuggestHighlightMatch(suggestionText, query);
+    const parts = AutosuggestHighlightParse(suggestionText, matches);
+
+    return (
+        <span className={'suggestion-content ' + suggestion.twitter}>
+      <span className="name">
+        {
+            parts.map((part, index) => {
+                const className = part.highlight ? 'highlight' : null;
+
+                return (
+                    <span className={className} key={index}>{part.text}</span>
+                );
+            })
+        }
+      </span>
+    </span>
+    );
+}
+
+let suggestionValue = '';
+
+class TextEditor extends React.Component
+{
+    constructor(props) {
+        super(props);
+        this.state = {
+            suggestions: people
+        };
+    }
+
+    getSuggestions = (value) => {
+        const escapedValue = escapeRegexCharacters(value.trim());
+
+        if (escapedValue === '') {
+            return people;
+        }
+
+        const regex = new RegExp('\\b' + escapedValue, 'i');
+
+        return people.filter(person => regex.test(this.getSuggestionValue(person)));
+    }
+
+    getSuggestionValue = (suggestion) => {
+        suggestionValue = `${suggestion.first} ${suggestion.last}`;
+        return suggestionValue;
+    }
+
+    onChange = (event, { newValue, method }) => {
+        this.props.onChange(newValue);
+    };
+
+    onSuggestionsFetchRequested = ({ value }) => {
+        this.setState({
+            suggestions: this.getSuggestions(value)
+        });
+    };
+
+    onSuggestionsClearRequested = () => {
+        this.setState({
+            suggestions: people
+        });
+    };
+
+    render() {
+        const { value, suggestions } = this.state;
+        const inputProps = {
+            placeholder: "Type 'field'",
+            value:(this.props.value)
+                ? this.props.value
+                : '',
+            onChange: this.onChange
+        };
+
+        return (
+            <React.Fragment>
+                <Inner>
+                    <Autosuggest
+                        suggestions={suggestions}
+                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                        getSuggestionValue={this.getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        highlightFirstSuggestion={true}
+                        inputProps={inputProps}
+                        alwaysRenderSuggestions={true}
+                        onSuggestionSelected={() => {
+                            this.props.onSubmit(suggestionValue);
+                        }}
+                   />
+                </Inner>
+            </React.Fragment>
+        )
+    }
 }
 
 export default TextEditor
