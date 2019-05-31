@@ -10,12 +10,12 @@ const QueryBuilder = (props) => {
     console.log('schema ', props.schema.__schema);
     return (
         <div>
-            <h2>Query Builder</h2>
+            <div className={"title-bar"}>
+                <h2>Query Builder</h2>
+            </div>
             <EndPoint endPoint = {props.endPoint}/>
-            <br />
-            <DocExplorer schema = {buildClientSchema(props.schema)} />
-            <br />
             <QueryTreeBuilder schema = {props.schema} />
+            <DocExplorer schema = {buildClientSchema(props.schema)} />
         </div>
     )
 }

@@ -27,9 +27,15 @@ const QueryTreeBuilder = (props) => {
     }
 
     return(
-        <div>
-            <TreeCheckBox schema = {treeData} handleQueryChange={(query) => {formatQueryToTree(query)}}/>
-            <QueryViewer query = {query} args={args}/>
+        <div className={"sections-container darker-bg"}>
+            <div className={"half height-500"}>
+                <h2 className={"mt-10 section-title"}>Fields selector</h2>
+                <TreeCheckBox schema = {treeData} handleQueryChange={(query) => {formatQueryToTree(query)}}/>
+            </div>
+            <div className={"half height-500"}>
+                <h2 className={"mt-10 section-title"}>Result JSON Structure</h2>
+                <QueryViewer query = {query} args={args}/>
+            </div>
         </div>
     );
 }
