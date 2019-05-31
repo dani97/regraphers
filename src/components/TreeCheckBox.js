@@ -26,14 +26,16 @@ const  TreeCheckBox = (props) => {
     }
 
     return (
-        <CheckboxTree
-            checked={checked}
-            expanded={expanded}
-            nodes={nodes}
-            optimisticToggle={false}
-            onCheck={onCheck}
-            onExpand={onExpand}
-        />
+        <div className={"overflow-section"}>
+            <CheckboxTree
+                checked={checked}
+                expanded={expanded}
+                nodes={nodes}
+                optimisticToggle={false}
+                onCheck={onCheck}
+                onExpand={onExpand}
+            />
+        </div>
     );
 }
 

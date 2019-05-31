@@ -9,7 +9,28 @@ import { Formik } from 'formik';
 const QueryTester = (props) => {
     let initialValues = {};
     props.args.forEach(arg => {
-        initialValues[arg.name] = '';
+        if(arg.type.kind == 'SCALAR') {
+
+            if(arg.type.name) {
+                const inputType = arg.type.name;
+                switch (inputType) {
+                    case 'Int':
+                        initialValues[arg.name] = 1;
+                        break;
+                    case 'Float':
+                        initialValues[arg.name] = 1.0;
+                        break;
+                    case 'Boolean':
+                        initialValues[arg.name] = false;
+                        break;
+                    default:
+                        initialValues[arg.name] = ''
+                }
+            }
+        }
+        else {
+            initialValues[arg.name] = '';
+        }
     });
 
     let [graphQLResult, setGraphQLResult] = useState(''),
@@ -27,7 +48,20 @@ const QueryTester = (props) => {
     function getInput(arg, handleChange) {
         console.log(arg);
         if(arg.type.kind == 'SCALAR') {
-            return <input name={arg.name} onChange={handleChange}></input>
+
+            if(arg.type.name) {
+                const inputType = arg.type.name;
+                switch (inputType) {
+                    case 'Int':
+                        return <input type = "number" name={arg.name} onChange={handleChange}/>;
+                    case 'Float':
+                        return <input type = "number" step = 'any' name={arg.name} onChange={handleChange}/>;
+                    case 'Boolean':
+                        return <input type = "checkbox" name={arg.name} onChange={handleChange} />;
+                    default:
+                        return <input name={arg.name} onChange={handleChange} />;
+                }
+            }
         }
         else {
             return <textarea name={arg.name} onChange={handleChange}></textarea>
@@ -39,8 +73,8 @@ const QueryTester = (props) => {
     }
 
     return (
-        <div>
-            <h1>Args List</h1>
+        <div className={"modal-container"}>
+            <h2 className={"modal-header"}>Args List</h2>
             <Formik
                 initialValues={initialValues}
                 onSubmit= {(values) => {
@@ -79,7 +113,7 @@ const QueryTester = (props) => {
                         <p>{JSON.stringify(values)}</p>
 
 
-                        <button type="submit" disabled={isSubmitting}>
+                        <button className={"btn-play"} type="submit" disabled={isSubmitting}>
                             Submit
                         </button>
                         <button type={'button'} onClick={closeModal}>Cancel</button>
