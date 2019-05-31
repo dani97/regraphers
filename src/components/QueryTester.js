@@ -12,7 +12,17 @@ const QueryTester = (props) => {
         initialValues[arg.name] = '';
     });
 
-    let [graphQLResult, setGraphQLResult] = useState('');
+    let [graphQLResult, setGraphQLResult] = useState(''),
+        [visible, setVisible] = useState(false);
+
+    const onOpenModal = () => {
+        console.log('into open modal in query tester');
+        setVisible(true);
+    }
+
+    const onCloseModal= () => {
+        setVisible(false);
+    }
 
     function getInput(arg, handleChange) {
         console.log(arg);
@@ -73,10 +83,6 @@ const QueryTester = (props) => {
                             Submit
                         </button>
                         <button type={'button'} onClick={closeModal}>Cancel</button>
-
-                        <button type={'button'} onClick={() => {
-                            props.handleSave();
-                        }}>Save</button>
                     </form>
                 )
 
