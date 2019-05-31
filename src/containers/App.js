@@ -4,6 +4,7 @@ import CreateProject from '../components/CreateProject';
 import ProjectGrid from "../components/ProjectGrid";
 import ExploreGrid from "../components/ExploreGrid";
 import QueryBuilder from "../components/QueryBuilder";
+import QueryGrid from "../components/QueryGrid";
 import Page from '../components/Page';
 import WireFrame from '../components/WireFrame';
 import { Provider } from 'react-redux';
@@ -20,6 +21,7 @@ const App = (props) => {
                     <Route path={"/projects"} component={ProjectGrid} />
                     <Route exact path={"/explore"} component={() => <ExploreGrid />} />
                     <Route exact path={"/queryBuilder"} render={() => <QueryBuilder/>} />
+                    <Route exact path={"/queries"} component={QueryGrid} />
                     <Route exact path={"/page"} component={Page} />
                     <Route exact path={"/wireFrame"} component={WireFrame} />
                 </Switch>
