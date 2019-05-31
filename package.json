@@ -31,6 +31,7 @@
     "react-dnd": "^7.4.3",
     "react-dom": "^16.8.4",
     "react-image-annotation": "^0.9.9",
+    "react-loader-spinner": "^2.3.0",
     "react-redux": "^7.0.3",
     "react-router": "^5.0.0",
     "react-router-dom": "^4.3.1",
