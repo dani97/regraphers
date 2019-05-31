@@ -7,6 +7,9 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "apollo-boost": "^0.4.0",
     "apollo-client": "^2.5.1",
     "autosuggest-highlight": "^3.1.1",

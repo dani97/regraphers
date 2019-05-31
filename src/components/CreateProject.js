@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { saveProject } from "../actions/project";
+import Message from "./Message";
 
 const CreateProject = (props) => {
     /**
@@ -50,23 +51,20 @@ const CreateProject = (props) => {
      * Value assigned for input types are the state values of the CreateProject Component
      */
     return (
-        <div>
-            <h2>Create New Project</h2>
+        <div className={"modal-container"}>
+            <h2 className={"modal-header"}>Create New Project</h2>
             <form onSubmit={saveProject}>
                 <div className={'control'}>
-                    <label className={'project-name'}>
-                        Project Name
-                    </label>
-                    <input type={'text'} value={projectName} onChange={handleProjectNameChange}/>
+                    <input type={'text'} value={projectName} placeholder={"Project Name"} onChange={handleProjectNameChange}/>
                 </div>
                 <div className={'control'}>
-                    <label className={'end-point'}>
-                        End Point
-                    </label>
-                    <input type={'text'} value={endPoint} onChange={handleEndPointChange}/>
+                    <input type={'text'} value={endPoint} placeholder={"End Point"} onChange={handleEndPointChange}/>
+                    <Message/>
                 </div>
-                <input type={'submit'} value={'Save'}/>
-                <button type={'button'} onClick={closeModal}>Cancel</button>
+                <div className={"flex-display mt-50"}>
+                    <input type={'submit'} className={"btn-primary"} value={'Save'}/>
+                    <button type={'button'} className={"btn-secondary"} onClick={closeModal}>Cancel</button>
+                </div>
             </form>
         </div>
     )
