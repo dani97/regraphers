@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
-import { jsonToGraphQLQuery } from 'json-to-graphql-query';
+import { jsonToGraphQLQuery, VariableType } from 'json-to-graphql-query';
 import { createEndPointOperation} from "../services/project";
 import {connect} from "react-redux";
 import Modal from "react-awesome-modal";
 import Message from "./Message";
-import CreateProject from "./CreateProject";
 import QueryTester from './QueryTester';
+
+function combineQueryArgs(query, args, queryType) {
+    if(!(Object.keys(query).length === 0
+        && query.constructor === Object)) {
+        query = {"query": query};
+        let queryArgs =  {};
+        let variables = {};
+        args.forEach((arg) => {
+            variables[arg.name] = arg.type.name;
+            queryArgs[arg.name] = new VariableType(arg.name);
+        });
+
+        query['query']['__variables'] = variables;
+        query['query'][queryType]['__args'] = queryArgs;
+
+        let queryHtml = jsonToGraphQLQuery(query, {pretty: true});
+        return queryHtml;
+    }
+    return '';
+
+}
 
 const QueryViewer = (props) => {
 
-    let queryHtml = !(Object.keys(props.query).length === 0
-        && props.query.constructor === Object) ?
-        jsonToGraphQLQuery(props.query, {pretty: true}): '';
+    let queryHtml = combineQueryArgs(props.query, props.args, props.queryType);
 
     let [visible, setVisible] = useState(false);
 
@@ -49,6 +67,7 @@ const QueryViewer = (props) => {
 }
 export default connect(
     state => ({
-        endPoint: state.project.endPoint
+        endPoint: state.project.endPoint,
+        queryType: state.queryType
     })
 )(QueryViewer);
