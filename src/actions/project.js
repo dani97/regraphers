@@ -4,6 +4,7 @@ import { showMessage } from "./message";
 
 export const CREATE_PROJECT = 'CREATE_PROJECT';
 export const ENDPOINT_ERROR_MESSAGE = 'Invalid endpoint';
+export const SAVE_QUERY_TYPE = 'SAVE_QUERY_TYPE';
 
 export const saveProject = (project, routerProps) => {
     /**
@@ -16,7 +17,7 @@ export const saveProject = (project, routerProps) => {
                     dispatch(createProject(project, schema));
                     if(routerProps && routerProps.history) {
                         console.log('history exister');
-                        routerProps.history.push('/queryBuilder');
+                        routerProps.history.push('/explore');
                     }
                 },
                   error => {

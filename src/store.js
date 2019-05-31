@@ -2,10 +2,12 @@ import { createStore, applyMiddleware, combineReducers , compose} from "redux";
 import thunk from 'redux-thunk';
 import { project } from './reducers/project';
 import { message} from "./reducers/message";
+import { queryType } from "./reducers/queryType";
 
 const reducers = combineReducers({
     project: project,
-    messages: message
+    messages: message,
+    queryType: queryType
 })
 
 /**

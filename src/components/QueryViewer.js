@@ -9,7 +9,6 @@ import QueryTester from './QueryTester';
 
 const QueryViewer = (props) => {
 
-    console.log('props are ', props);
     let queryHtml = !(Object.keys(props.query).length === 0
         && props.query.constructor === Object) ?
         jsonToGraphQLQuery(props.query, {pretty: true}): '';

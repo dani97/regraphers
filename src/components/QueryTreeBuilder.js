@@ -12,8 +12,8 @@ const QueryTreeBuilder = (props) => {
 
     if(props.schema) {
         let typesObject = createTypesObject(props.schema);
-        args = formatArg(typesObject);
-        treeData = formatSchemaToTree(typesObject);
+        args = formatArg(typesObject, props.queryType);
+        treeData = formatSchemaToTree(typesObject, props.queryType);
     }
 
     const formatQueryToTree = (query) => {
@@ -21,8 +21,6 @@ const QueryTreeBuilder = (props) => {
         query.forEach(queryLine => {
             buildQuery(queryLine , queryJson);
         });
-        console.log('query json ', queryJson);
-        console.log('args are ', args);
         setQuery(queryJson);
     }
 

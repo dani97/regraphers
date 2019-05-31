@@ -6,8 +6,6 @@ import { DocExplorer } from './DocExplorer';
 import QueryTreeBuilder from './QueryTreeBuilder';
 
 const QueryBuilder = (props) => {
-    console.log('query builder props ',props);
-    console.log('schema ', props.schema.__schema);
     return (
         <div>
             <h2>Query Builder</h2>
@@ -15,7 +13,7 @@ const QueryBuilder = (props) => {
             <br />
             <DocExplorer schema = {buildClientSchema(props.schema)} />
             <br />
-            <QueryTreeBuilder schema = {props.schema} endPoint = {props.endPoint} />
+            <QueryTreeBuilder schema = {props.schema} endPoint = {props.endPoint} queryType = {props.queryType} />
         </div>
     )
 }
@@ -23,6 +21,7 @@ const QueryBuilder = (props) => {
 export default connect(
     state => ({
         endPoint: state.project.endPoint,
-        schema: state.project.schema
+        schema: state.project.schema,
+        queryType: state.queryType
     })
 )(QueryBuilder);
