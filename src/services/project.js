@@ -62,29 +62,39 @@ export const createTypesObject = (schema) => {
     return typesObject;
 }
 
-export const formatArg = (types) => {
+export const formatArg = (typesObject, queryType) => {
     try {
-        const queryType = types['Query'].fields.find((type) => {
-            return (type.name == 'cmsPage')});
-
-        return queryType.args;
+        let query = typesObject['Query'].fields.find((type) => {
+            return type.name == queryType});
+        return (query) ? query.args : null;
     }
     catch (e) {
         return null;
     }
 }
 
-export const formatSchemaToTree = (schemaType) => {
-    if(schemaType === null || schemaType ==  {} ) {
+export const formatSchemaToTree = (typesObject, queryType) => {
+    let queryReturnType = null,
+        schemaTree = [];
+
+    if(typesObject === null || typesObject ==  {} ) {
         return [];
     }
-    console.log("schema type", schemaType);
-    let fields = schemaType['CmsPage'].fields;
-    const schemaTree = [];
-    for (const field of fields) {
-        createSchemaTree(schemaType, schemaTree, field, 'cmsPage');
-    }
 
+    if(typesObject && typesObject.Query) {
+        let fields = typesObject.Query.fields;
+        fields.forEach((field) => {
+            if(field.name == queryType) {
+              queryReturnType = field.type.name;
+            }
+        })
+    }
+    if(queryReturnType) {
+        let fields = typesObject[queryReturnType].fields;
+        for (let field of fields) {
+            createSchemaTree(typesObject, schemaTree, field, queryType);
+        }
+    }
     return schemaTree;
 }
 
