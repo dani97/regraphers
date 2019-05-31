@@ -7,7 +7,7 @@ const Message = (props) => {
         <div>
             {props.messages.map(message =>
                 <div key={message.id}>
-                    <h3 className={message.type}>{message.value}</h3>
+                    <h3 className={"message " + message.type}>{message.value}</h3>
                 </div>
             )}
         </div>
