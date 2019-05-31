@@ -61,7 +61,7 @@ const CreateProject = (props) => {
                     <input type={'text'} value={endPoint} placeholder={"End Point"} onChange={handleEndPointChange}/>
                     <Message/>
                 </div>
-                <div className={"flex-display mt-50"}>
+                <div className={"flex-display mt-55"}>
                     <input type={'submit'} className={"btn-primary"} value={'Save'}/>
                     <button type={'button'} className={"btn-secondary"} onClick={closeModal}>Cancel</button>
                 </div>

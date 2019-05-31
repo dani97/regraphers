@@ -53,14 +53,14 @@ const QueryViewer = (props) => {
         createEndPointOperation(payload).then((result) => console.log(result));
     }
     return (
-        <div>
+        <div className={"overflow-section"}>
             <pre dangerouslySetInnerHTML={{__html: queryHtml}}></pre>
-            <button onClick={onOpenModal}> Test </button>
-            <Modal visible={visible} width="400" height="300" effect="fadeInUp" onClickAway={onCloseModal}>
+            <button className={"btn-primary btn-test"} onClick={onOpenModal}> Test </button>
+            <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                 <Message/>
                 <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} handleSave={handleSave}/>
             </Modal>
-            <button onClick={handleSave}> save </button>
+            <button className={"btn-secondary btn-save"} onClick={handleSave}> save </button>
         </div>
     )
 
