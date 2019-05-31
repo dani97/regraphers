@@ -14,8 +14,8 @@ import LoaderComponent from './../components/LoaderComponent';
 const App = (props) => {
     return (
         <div>
-            {/*<LoaderComponent visibility = {"hidden"} />*/}
             <Provider store={store}>
+            <LoaderComponent/>
                 <Switch>
                     <Route exact path={"/"} component={ProjectGrid} />
                     <Route path={"/projects"} component={ProjectGrid} />

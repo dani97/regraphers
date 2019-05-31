@@ -10,7 +10,7 @@ export const getIntrospectionSchema = (endPoint) => {
         variables: {
             endPoint: endPoint
         },
-        fetchPolicy: "cache-first"
+        fetchPolicy: "network-only"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
