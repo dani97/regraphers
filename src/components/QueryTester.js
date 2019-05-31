@@ -1,4 +1,5 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
+import { executeGraphqlOperation, getGraphQLOperationPayload } from '../services/project';
 import { Formik } from 'formik';
 
 // Here is an example of a form with an editable list.
@@ -10,6 +11,8 @@ const QueryTester = (props) => {
     props.args.forEach(arg => {
         initialValues[arg.name] = '';
     });
+
+    let [graphQLResult, setGraphQLResult] = useState('');
 
     function getInput(arg, handleChange) {
         console.log(arg);
@@ -30,10 +33,18 @@ const QueryTester = (props) => {
             <h1>Args List</h1>
             <Formik
                 initialValues={initialValues}
-                onSubmit={values =>
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                    }, 500)
+                onSubmit= {(values) => {
+                        console.log('values are ', values);
+                        let query = "query cmsPage($id : Int) { cmsPage(id: $id) { content } }";
+                            values = "{ \"id\": 3}";
+                        let payload = getGraphQLOperationPayload(props.endPoint, query, values);
+                        console.log('payload is ', payload);
+                        executeGraphqlOperation(payload).then((result) => {
+                            if(result && result.data && result.data.executeGraphqlOperation) {
+                                setGraphQLResult(result.data.executeGraphqlOperation);
+                            }
+                        });
+                    }
                 }>
                 {({
                       values,
@@ -62,11 +73,18 @@ const QueryTester = (props) => {
                             Submit
                         </button>
                         <button type={'button'} onClick={closeModal}>Cancel</button>
+
+                        <button type={'button'} onClick={() => {
+                            props.handleSave();
+                        }}>Save</button>
                     </form>
                 )
 
                 }
             </Formik>
+            <div>
+                <pre dangerouslySetInnerHTML={{__html: graphQLResult}}></pre>
+            </div>
         </div>
     );
 }

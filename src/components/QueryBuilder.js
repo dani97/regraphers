@@ -15,7 +15,7 @@ const QueryBuilder = (props) => {
             <br />
             <DocExplorer schema = {buildClientSchema(props.schema)} />
             <br />
-            <QueryTreeBuilder schema = {props.schema} />
+            <QueryTreeBuilder schema = {props.schema} endPoint = {props.endPoint} />
         </div>
     )
 }

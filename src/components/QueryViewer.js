@@ -41,7 +41,7 @@ const QueryViewer = (props) => {
             <button onClick={onOpenModal}> Test </button>
             <Modal visible={visible} width="400" height="300" effect="fadeInUp" onClickAway={onCloseModal}>
                 <Message/>
-                <QueryTester closeModal={onCloseModal} args={props.args}/>
+                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} handleSave={handleSave}/>
             </Modal>
             <button onClick={handleSave}> save </button>
         </div>
