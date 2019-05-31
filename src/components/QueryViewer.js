@@ -28,7 +28,7 @@ const QueryViewer = (props) => {
         const payload = {
                 "endpoint": props.endPoint+'/',
                 "name": "CMS query 404 page",
-                "query_string": queryHtml,
+                "query_string": JSON.stringify(props.query),
                 "page": "404 page",
                 "description": "CMS query on the 404"
             };

@@ -13,7 +13,7 @@ import LoaderComponent from './../components/LoaderComponent';
 const App = (props) => {
     return (
         <div>
-            <LoaderComponent visibility = {"hidden"} />
+            {/*<LoaderComponent visibility = {"hidden"} />*/}
             <Provider store={store}>
                 <Switch>
                     <Route exact path={"/"} component={ProjectGrid} />

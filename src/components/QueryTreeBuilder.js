@@ -17,7 +17,7 @@ const QueryTreeBuilder = (props) => {
     }
 
     const formatQueryToTree = (query) => {
-        let queryJson = {}
+        let queryJson = {};
         query.forEach(queryLine => {
             buildQuery(queryLine , queryJson);
         });
