@@ -8,12 +8,12 @@ import QueryTreeBuilder from './QueryTreeBuilder';
 const QueryBuilder = (props) => {
     return (
         <div>
-            <h2>Query Builder</h2>
+            <div className={"title-bar"}>
+                <h2>Query Builder</h2>
+            </div>
             <EndPoint endPoint = {props.endPoint}/>
-            <br />
-            <DocExplorer schema = {buildClientSchema(props.schema)} />
-            <br />
             <QueryTreeBuilder schema = {props.schema} endPoint = {props.endPoint} queryType = {props.queryType} />
+            <DocExplorer schema = {buildClientSchema(props.schema)} />
         </div>
     )
 }

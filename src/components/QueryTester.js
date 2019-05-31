@@ -29,8 +29,8 @@ const QueryTester = (props) => {
     }
 
     return (
-        <div>
-            <h1>Args List</h1>
+        <div className={"modal-container"}>
+            <h2 className={"modal-header"}>Args List</h2>
             <Formik
                 initialValues={initialValues}
                 onSubmit= {(values) => {
@@ -69,7 +69,7 @@ const QueryTester = (props) => {
                         <p>{JSON.stringify(values)}</p>
 
 
-                        <button type="submit" disabled={isSubmitting}>
+                        <button className={"btn-play"} type="submit" disabled={isSubmitting}>
                             Submit
                         </button>
                         <button type={'button'} onClick={closeModal}>Cancel</button>
