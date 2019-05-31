@@ -29,7 +29,7 @@ const QueryTreeBuilder = (props) => {
     return(
         <div>
             <TreeCheckBox schema = {treeData} handleQueryChange={(query) => {formatQueryToTree(query)}}/>
-            <QueryViewer query = {query} args={args}/>
+            <QueryViewer query = {query} args={args} endPoint={props.endPoint}/>
         </div>
     );
 }
