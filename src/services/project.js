@@ -1,5 +1,6 @@
 import { AwsClient } from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
+import ResponseMutation from '../graphQL/ResponseMutation';
 import {buildClientSchema} from "graphql";
 import {CreateEndPointOperation} from "../graphQL/EndPointOperation";
 
@@ -25,6 +26,15 @@ export const createEndPointOperation = (CreateEndPointInput) => {
         .then((response) => response.data['createEndPointOperation']);
 }
 
+export const executeGraphqlOperation = (variables) => {
+    return AwsClient.mutate({
+        mutation: ResponseMutation,
+        variables,
+        fetchPolicy: "no-cache"
+    })
+        .then((response) => response)
+}
+
 export const saveEndPointOperation = (endPoint) => {
     return AwsClient.query({
         query: QueryIntrospectionSchema,
@@ -35,6 +45,12 @@ export const saveEndPointOperation = (endPoint) => {
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
+
+export const getGraphQLOperationPayload = (endPoint, query, values) => ({
+    endPoint,
+    query,
+    variables: values
+})
 
 export const createTypesObject = (schema) => {
     if(!schema) return {};
@@ -49,7 +65,7 @@ export const createTypesObject = (schema) => {
 export const formatArg = (types) => {
     try {
         const queryType = types['Query'].fields.find((type) => {
-            return (type.name == 'products')});
+            return (type.name == 'cmsPage')});
 
         return queryType.args;
     }
@@ -63,10 +79,10 @@ export const formatSchemaToTree = (schemaType) => {
         return [];
     }
     console.log("schema type", schemaType);
-    let fields = schemaType['Products'].fields;
+    let fields = schemaType['CmsPage'].fields;
     const schemaTree = [];
     for (const field of fields) {
-        createSchemaTree(schemaType, schemaTree, field, 'products');
+        createSchemaTree(schemaType, schemaTree, field, 'cmsPage');
     }
 
     return schemaTree;
