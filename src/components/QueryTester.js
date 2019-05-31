@@ -17,10 +17,10 @@ const QueryTester = (props) => {
     function getInput(arg, handleChange) {
         console.log(arg);
         if(arg.type.kind == 'SCALAR') {
-            return <input name={arg.name} onChange={handleChange}></input>
+            return <input type="text" className={"mb-20"} placeholder={arg.name} name={arg.name} onChange={handleChange}></input>
         }
         else {
-            return <textarea name={arg.name} onChange={handleChange}></textarea>
+            return <textarea name={arg.name} placeholder={arg.name} className={"mb-20"} onChange={handleChange}></textarea>
         }
     }
 
@@ -56,33 +56,31 @@ const QueryTester = (props) => {
                       isSubmitting,
                       /* and other goodies */
                   }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form className={"args-form"} onSubmit={handleSubmit}>
                         {
                             props.args.map((arg,index) => (
                                 <Fragment key={index}>
-                                    <label>{arg.name}</label>
                                     {getInput(arg, handleChange)}
-                                    <br></br>
                                 </Fragment>
                             ))
                         }
-                        <p>{JSON.stringify(values)}</p>
 
 
                         <button className={"btn-play"} type="submit" disabled={isSubmitting}>
-                            Submit
+                            <svg width="35" height="35" viewBox="3.5,4.5,24,24"><path d="M 11 9 L 24 16 L 11 23 z"></path></svg>
                         </button>
-                        <button type={'button'} onClick={closeModal}>Cancel</button>
 
-                        <button type={'button'} onClick={() => {
+                        <button type={'button'} className={"btn-primary fixed-right"} onClick={() => {
                             props.handleSave();
                         }}>Save</button>
+
+                        <button type={'button'} className={"btn-secondary fixed-right"} onClick={closeModal}>Cancel</button>
                     </form>
                 )
 
                 }
             </Formik>
-            <div>
+            <div className={"test-sample-response"}>
                 <pre dangerouslySetInnerHTML={{__html: graphQLResult}}></pre>
             </div>
         </div>

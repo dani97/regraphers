@@ -102,9 +102,80 @@ input[type="text"] {
     border-color: var(--header-color);
 }
 
+.btn-play {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: background-color 100ms ease 0s;
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgb(11, 20, 28);
+    border-image: initial;
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+}
+.btn-play:hover {
+    background-color: var(--card-border-color);
+}
+
+.btn-primary.fixed-right,
+.btn-secondary.fixed-right {
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+}
+
+.btn-primary.fixed-right {
+    right: 150px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.args-form {
+    width: 40%;
+    display: inline-block;
+}
+.test-sample-response {
+    display: inline-block;
+    width: 45%;
+    overflow: auto;
+    float: right;
+    margin: 30px 20px 20px 20px;
+    max-height: 400px;
+}
+
+.query-type {
+    cursor: pointer;
+}
+
+.query-type.secondary-card {
+    margin: 30px;
+}
+.query-type.secondary-card h3{
+    margin: 40px;
+}
+
+.query-type.secondary-card:active {
+    background-color: var(--primary-color);
+}
+
 .flex-display {
     display: flex;
     justify-content: space-between;
+}
+
+.modal-container textarea {
+    width: 95%;
 }
 
 .mt-55 {
