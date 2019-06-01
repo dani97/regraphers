@@ -1,79 +1,61 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 import { connect } from "react-redux";
 import { saveProject } from "../actions/project";
 import Message from "./Message";
 
-const CreateProject = (props) => {
-    /**
-     * By default in RouterV4, there are certain props that all routes can
-     * access inside a Router Component, match, location, history, staticContext
-     */
-    console.log('props are ',props);
+const projectSchema = Yup.object().shape({
+    projectName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(70, 'Too Long!')
+        .required('Required'),
+    endPoint: Yup.string()
+        .required('Required')
+});
 
-    /**
-     * Sets projectName and endPoint as local state for
-     * CreateProject Component
-     */
-    let [projectName, setProjectName] = useState('');
-    let [endPoint, setEndPoint] = useState('');
-
-    const handleProjectNameChange = (event) => {
-        /**
-         * To change the state of the variable declared use the
-         * setters for the state
-         */
-        setProjectName(event.target.value);
-    }
-    const handleEndPointChange = (event) => {
-        setEndPoint(event.target.value);
-    }
-
-    const saveProject = (event) => {
-        event.preventDefault();
-        let routerProps = (props.routerProps)
-                            ? props.routerProps
-                            : null;
-        console.log('router props are ', routerProps);
-        props.saveProject({
-            id: new Date().getTime(),
-            projectName: projectName,
-            endPoint: endPoint
-        }, routerProps);
-
-    }
-
-    const closeModal = (event) => {
-        console.log('into close modal');
-        props.closeModal();
-    }
-    /**
-     * Value assigned for input types are the state values of the CreateProject Component
-     */
-    return (
-        <div className={"modal-container"}>
-            <h2 className={"modal-header"}>Create New Project</h2>
-            <form onSubmit={saveProject}>
-                <div className={'control'}>
-                    <input type={'text'} value={projectName} placeholder={"Project Name"} onChange={handleProjectNameChange}/>
-                </div>
-                <div className={'control'}>
-                    <input type={'text'} value={endPoint} placeholder={"End Point"} onChange={handleEndPointChange}/>
+const CreateProject = (props) => (
+    <div className={"modal-container"}>
+        <h2 className={"modal-header"}>Create New Project</h2>
+        <Formik
+            initialValues={{
+                projectName: '',
+                endPoint: ''
+            }}
+            validationSchema={projectSchema}
+            onSubmit={values => {
+                let routerProps = (props.routerProps)
+                    ? props.routerProps
+                    : null;
+                console.log('router props are ', routerProps);
+                props.saveProject({
+                    id: new Date().getTime(),
+                    projectName: values.projectName,
+                    endPoint: values.endPoint
+                }, routerProps);
+            }}>
+            {({ errors, touched }) => (
+                <Form>
                     <Message/>
-                </div>
-                <div className={"flex-display mt-55"}>
-                    <input type={'submit'} className={"btn-primary"} value={'Save'}/>
-                    <button type={'button'} className={"btn-secondary"} onClick={closeModal}>Cancel</button>
-                </div>
-            </form>
-        </div>
-    )
-}
-
-/*const mapStateToProps = (state) => state;
-const mapDispatchToProps = (dispatch) => bindActionCreators({updateProject}, dispatch);
-const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(CreateProject);
-export default ConnectedApp;*/
+                    <div className={'control'}>
+                        <Field name="projectName" placeholder={"Project Name"}  />
+                        <ErrorMessage name="projectName" />
+                    </div>
+                    <div className={'control'}>
+                        <Field name="endPoint" placeholder={"End Point"} />
+                        <ErrorMessage name="endPoint" />
+                    </div>
+                    <div className={"flex-display mt-55"}>
+                        <button type={'submit'} className={"btn-primary"} value={'Save'}/>
+                        <button type={'button'} className={"btn-secondary"} value={'Cancel'} onClick={() => {
+                            props.closeModal()
+                        }}/>
+                    </div>
+                </Form>
+            )}
+        </Formik>
+    </div>
+);
 
 export default connect(
     (state) => ({}),

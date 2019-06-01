@@ -9,15 +9,59 @@ import { Formik } from 'formik';
 const QueryTester = (props) => {
     let initialValues = {};
     props.args.forEach(arg => {
-        initialValues[arg.name] = '';
+        if(arg.type.kind == 'SCALAR') {
+
+            if(arg.type.name) {
+                const inputType = arg.type.name;
+                switch (inputType) {
+                    case 'Int':
+                        initialValues[arg.name] = 1;
+                        break;
+                    case 'Float':
+                        initialValues[arg.name] = 1.0;
+                        break;
+                    case 'Boolean':
+                        initialValues[arg.name] = false;
+                        break;
+                    default:
+                        initialValues[arg.name] = ''
+                }
+            }
+        }
+        else {
+            initialValues[arg.name] = '';
+        }
     });
 
-    let [graphQLResult, setGraphQLResult] = useState('');
+    let [graphQLResult, setGraphQLResult] = useState(''),
+        [visible, setVisible] = useState(false);
+
+    const onOpenModal = () => {
+        console.log('into open modal in query tester');
+        setVisible(true);
+    }
+
+    const onCloseModal= () => {
+        setVisible(false);
+    }
 
     function getInput(arg, handleChange) {
         console.log(arg);
         if(arg.type.kind == 'SCALAR') {
-            return <input type="text" className={"mb-20"} placeholder={arg.name} name={arg.name} onChange={handleChange}></input>
+
+            if(arg.type.name) {
+                const inputType = arg.type.name;
+                switch (inputType) {
+                    case 'Int':
+                        return <input type = "number" className={"mb-20"} name={arg.name} onChange={handleChange}/>;
+                    case 'Float':
+                        return <input type = "number" step = 'any' className={"mb-20"} name={arg.name} onChange={handleChange}/>;
+                    case 'Boolean':
+                        return <input type = "checkbox" className={"mb-20"} name={arg.name} onChange={handleChange} />;
+                    default:
+                        return <input type="text" className={"mb-20"} name={arg.name} onChange={handleChange} />;
+                }
+            }
         }
         else {
             return <textarea name={arg.name} placeholder={arg.name} className={"mb-20"} onChange={handleChange}></textarea>

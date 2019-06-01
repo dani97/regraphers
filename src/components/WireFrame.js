@@ -31,7 +31,7 @@ class WireFrame extends Component {
     }
 
     render () {
-        console.log('props in app ', this.state);
+        console.log('props in wireFrame ', this.props);
         return (
             <Annotation
                 src='https://wi-images.condecdn.net/image/d91Wlky6Pw3/crop/810/f/googleandroidfine.jpg'

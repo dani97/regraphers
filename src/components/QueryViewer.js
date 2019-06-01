@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import Modal from "react-awesome-modal";
 import Message from "./Message";
 import QueryTester from './QueryTester';
+import SaveEditor from './SaveEditor';
+import { Link } from 'react-router-dom';
 
 function combineQueryArgs(query, args, queryType) {
     if(!(Object.keys(query).length === 0
@@ -32,6 +34,7 @@ const QueryViewer = (props) => {
     let queryHtml = combineQueryArgs(props.query, props.args, props.queryType);
 
     let [visible, setVisible] = useState(false);
+    let [saveVisibility, setSaveVisibility] = useState(false);
 
     const onOpenModal = () => {
         setVisible(true);
@@ -41,16 +44,30 @@ const QueryViewer = (props) => {
         setVisible(false);
     }
 
-    const handleSave = () => {
-        console.log("query to be saved" , props.query);
+    const onSaveOpenModal = () => {
+        setSaveVisibility(true);
+    }
+
+    const onSaveCloseModal = () => {
+        setSaveVisibility(false);
+    }
+
+    const handleSave = (queryValues) => {
+        console.log("query to be saved" , queryValues);
         const payload = {
                 "endpoint": props.endPoint+'/',
-                "name": "CMS query 404 page",
                 "query_string": JSON.stringify(props.query),
-                "page": "404 page",
-                "description": "CMS query on the 404"
+                "graphql_query": queryHtml,
+                "page": queryValues.page,
+                "name": queryValues.queryName,
+                "description": queryValues.description
             };
-        createEndPointOperation(payload).then((result) => console.log(result));
+        console.log('payload is ', payload);
+        createEndPointOperation(payload).then((result) => {
+            console.log(result);
+          //  onSaveCloseModal();
+        });
+
     }
     return (
         <div className={"overflow-section"}>
@@ -58,9 +75,14 @@ const QueryViewer = (props) => {
             <button className={"btn-primary btn-test"} onClick={onOpenModal}> Test </button>
             <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                 <Message/>
-                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} handleSave={handleSave}/>
+                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} />
             </Modal>
-            <button className={"btn-secondary btn-save"} onClick={handleSave}> save </button>
+
+            <button className={"btn-secondary btn-save"} onClick={onSaveOpenModal}> Save </button>
+            <Modal visible={saveVisibility} width="400" height="300" effect="fadeInUp" onClickAway={onSaveCloseModal}>
+                <SaveEditor closeModal={onSaveCloseModal} handleSave={handleSave}/>
+                <Link to={'/queries'}>Queries</Link>
+            </Modal>
         </div>
     )
 
