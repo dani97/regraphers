@@ -64,7 +64,7 @@ const QueryTester = (props) => {
             }
         }
         else {
-            return <textarea name={arg.name} placeholder={arg.name} className={"mb-20"} onChange={handleChange}></textarea>
+            return <textarea name={arg.name} className={"mb-20"} onChange={handleChange}></textarea>
         }
     }
 

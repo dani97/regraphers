@@ -34,12 +34,12 @@ const CreateProject = (props) => (
             }}>
             {({ errors, touched }) => (
                 <Form>
-                    <Message/>
                     <div className={'control'}>
                         <Field type="text" name="projectName" placeholder={"Project Name"} required={"required"} />
                     </div>
                     <div className={'control'}>
                         <Field type="text" name="endPoint" placeholder={"End Point"} required={"required"} />
+                        <Message/>
                     </div>
                     <div className={"flex-display mt-55"}>
                         <button type={'submit'} className={"btn-primary"}>Save</button>
