@@ -125,9 +125,9 @@ export class DocExplorer extends React.Component {
               onClick={this.handleNavBackClick}>
               {prevName}
             </div>}
-          <div className="doc-explorer-title">
+          <h2 className="section-title mt-10 doc-explorer-title">
             {navItem.title || navItem.name}
-          </div>
+          </h2>
           <div className="doc-explorer-rhs">
             {this.props.children}
           </div>
