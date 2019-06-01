@@ -3,10 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { listEndPointOperations } from "../services/project";
 import { saveAnnotatedQuery } from "../actions/query";
+import Modal from "react-awesome-modal";
+import SaveEditor from "./SaveEditor";
+import Message from "./Message";
+import QueryTester from "./QueryTester";
 
 const QueryGrid = (props) => {
 
     let [queries, setQueries] = useState([]);
+    let [visible, setVisible] = useState(false);
+
+    const onOpenModal = () => {
+        setVisible(true);
+    }
+
+    const onCloseModal= () => {
+        setVisible(false);
+    }
 
     console.log('in query gris props ', props);
     useEffect(() => {
@@ -26,20 +39,32 @@ const QueryGrid = (props) => {
         }
     },[]);
 
-    return (<div>
-        {queries.map((query, index) => (
+    return (
+        <div>
+            {queries.map((query, index) => (
                 <div key={index}>
-                    <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
-                    <button className={"btn-primary"} onClick={() => {
+                    <div onClick={onOpenModal}>
+                        <div>
+                            <h3>{query.name}</h3>
+                            <p>{query.description}</p>
+                        </div>
+                    </div>
+                    <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
+                        <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
+                        <button type={'button'} className={"btn-secondary"} onClick={() => {
+                            onCloseModal();
+                        }}>Cancel</button>
+                    </Modal>
+                    <button onClick={() => {
                         props.saveAnnotatedQuery(query);
                     }}>Annotate</button>
                 </div>
-            )
-        )}
-        <Link to={'/wireFrame'}>
-            <h3>Proceed to Annotate</h3>
-        </Link>
-    </div>);
+                )
+            )}
+            <Link to={'/wireFrame'}>
+                <h3>Proceed to Annotate</h3>
+            </Link>
+        </div>);
 }
 
 export default connect(

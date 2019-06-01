@@ -6,6 +6,7 @@ export const ListEndPointOperations = gql`
             items {
                 id
                 endpoint
+                description
                 query_string
                 graphql_query
                 page
