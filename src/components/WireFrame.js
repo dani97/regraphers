@@ -51,10 +51,13 @@ class WireFrame extends Component {
                     )}/>
                 <button type={'submit'} className={"btn-primary"} value={'Save'} onClick={() => {
                     let payload = {
-                        "query_id": (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '' ,
-                        "image_url": "https://wi-images.condecdn.net/image/d91Wlky6Pw3/crop/810/f/googleandroidfine.jpg",
-                        "annotation": this.state.annotations
+                        "input": {
+                            "query_id": (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
+                            "image_url": "https://wi-images.condecdn.net/image/d91Wlky6Pw3/crop/810/f/googleandroidfine.jpg",
+                            "annotation": this.state.annotations
+                        }
                     }
+                    console.log('payload ', payload);
                     createAnnotatedQueries(payload).then((result) =>  {
                         console.log('result is ', result);
                     })

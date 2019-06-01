@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { jsonToGraphQLQuery, VariableType } from 'json-to-graphql-query';
 import { createEndPointOperation} from "../services/project";
 import {connect} from "react-redux";
@@ -33,8 +33,23 @@ const QueryViewer = (props) => {
 
     let queryHtml = combineQueryArgs(props.query, props.args, props.queryType);
 
-    let [visible, setVisible] = useState(false);
-    let [saveVisibility, setSaveVisibility] = useState(false);
+    let [visible, setVisible] = useState(false),
+        [saveVisibility, setSaveVisibility] = useState(false),
+        [copySuccess, setCopySuccess] = useState(''),
+        queryViewerRef = useRef(null);
+
+    const copyToClipboard = (event) => {
+        let textContent = queryViewerRef.current.textContent,
+            textArea = document.createElement('textarea');
+
+        textArea.textContent = textContent;
+        document.body.append(textArea);
+        textArea.select();
+
+        document.execCommand("copy");
+        event.target.focus();
+        setCopySuccess('Copied!');
+    };
 
     const onOpenModal = () => {
         setVisible(true);
@@ -71,7 +86,18 @@ const QueryViewer = (props) => {
     }
     return (
         <div className={"overflow-section"}>
-            <pre dangerouslySetInnerHTML={{__html: queryHtml}}></pre>
+            <div>
+                {
+                    /* Logical shortcut for only displaying the
+                       button if the copy command exists */
+                    document.queryCommandSupported('copy') &&
+                    <div>
+                        <button onClick={copyToClipboard}>Copy</button>
+                        {copySuccess}
+                    </div>
+                }
+            </div>
+            <pre ref={queryViewerRef} dangerouslySetInnerHTML={{__html: queryHtml}}></pre>
             <button className={"btn-primary btn-test"} onClick={onOpenModal}> Test </button>
             <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                 <Message/>
