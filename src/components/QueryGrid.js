@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { listEndPointOperations } from "../services/project";
-import { saveAnnotatedQuery } from "../actions/query";
 import Modal from "react-awesome-modal";
 import AwsExports from '../AwsExports';
+import AwsClient from '../AwsClient';
 import Amplify, { Auth } from 'aws-amplify';
 import {v4 as uuid } from 'uuid';
+import { createWireFrame } from "../actions/wireFrame";
+import { createNewWireFrame } from "../services/project";
+import { showLoader } from "../actions/loader";
 
 Amplify.configure(AwsExports);
 
 const QueryGrid = (props) => {
+
+    const S3_BASE_URL = 'https://s3.amazonaws.com/';
 
     let [queries, setQueries] = useState([]);
     let [visible, setVisible] = useState(false);
@@ -22,7 +27,7 @@ const QueryGrid = (props) => {
         setVisible(false);
     }
 
-    const handleFileChange = (fileInput) => {
+    const handleFileChange = (fileInput, query) => {
         if(fileInput && fileInput.length > 0) {
             let selectedFile = fileInput[0];
             (async () => {
@@ -49,25 +54,36 @@ const QueryGrid = (props) => {
                     };
                     console.log("selected file", file, extension);
                 }
-
-                client.mutate({
-                    mutation: gql(createTodo),
-                    variables: {
-                        input: {
-                            name: 'Upload file',
-                            description: 'Uses complex objects to upload',
-                            file: file,
+                let payload = {
+                    id: new Date().getTime(),
+                    query_id: query.id,
+                    file
+                }
+                props.showLoader(true);
+                createNewWireFrame(payload).then((result) => {
+                        props.showLoader(false);
+                        console.log(result);
+                        let image_url= null;
+                        if(result && result.data && result.data.createWireFrame) {
+                            let file = result.data.createWireFrame.file;
+                            image_url = S3_BASE_URL + file.bucket + '/' + file.key
                         }
+                        props.createWireFrame({
+                            query,
+                            image_url
+                        });
+                        props.routerProps.history.push('/wireFrame');
+                    },
+                    error => {
+                        console.log('error is ', error);
+                        props.showLoader(false);
                     }
-                }).then((result) => {
-                    console.log(result)
-                });
-
+                );
             })();
         }
     }
 
-    console.log('in query gris props ', props);
+    console.log('in wireFrame gris props ', props);
     useEffect(() => {
         console.log('endpoint in grid ', props.endPoint);
         if(props.endPoint.trim().length) {
@@ -77,7 +93,7 @@ const QueryGrid = (props) => {
                 if(result.data && result.data.listEndPointOperations) {
                     let endPointOperations = result.data.listEndPointOperations;
                     if(endPointOperations && endPointOperations.items && endPointOperations.items.length) {
-                        console.log('before setting to query  ', endPointOperations.items);
+                        console.log('before setting to wireFrame  ', endPointOperations.items);
                         setQueries(endPointOperations.items);
                     }
                 }
@@ -91,15 +107,15 @@ const QueryGrid = (props) => {
                 <h2>Saved Queries</h2>
             </div>
             {queries.map((query, index) => (
-                <div className={"secondary-card saved-query"} key={index}>
-                    <div className={"secondary-card-main"} onClick={onOpenModal}>
-                        <div>
+                <div className={"secondary-card saved-wireFrame"} key={index}>
+                    <div className={"secondary-card-main"}>
+                        <div onClick={onOpenModal}>
                             <h3>{query.name}</h3>
                             <p>{query.description}</p>
                         </div>
-                        <div>
-                            <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files)} />
-                        </div>
+
+                            <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files, query)} />
+
                     </div>
                     <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                         <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
@@ -107,12 +123,6 @@ const QueryGrid = (props) => {
                             onCloseModal();
                         }}>Cancel</button>
                     </Modal>
-                    <div className={"secondary-card-actions"}>
-                    <button className={"action primary"} onClick={() => {
-                        props.saveAnnotatedQuery(query);
-                        props.routerProps.history.push('/wireFrame');
-                    }}>Annotate</button>
-                    </div>
                 </div>
                 )
             )}
@@ -123,5 +133,5 @@ export default connect(
     state => ({
         endPoint: state.project.endPoint
     }),
-    {saveAnnotatedQuery}
+    {createWireFrame, showLoader}
 )(QueryGrid);

@@ -9,6 +9,7 @@ import SaveEditor from './SaveEditor';
 import {showLoader} from "../actions/loader";
 
 function combineQueryArgs(query, args, queryType) {
+    console.log(query, args, queryType);
     if(!(Object.keys(query).length === 0
         && query.constructor === Object)) {
         query = {"query": query};
@@ -69,7 +70,7 @@ const QueryViewer = (props) => {
 
     const handleSave = (queryValues) => {
         props.showLoader(true);
-        console.log("query to be saved" , queryValues);
+        console.log("wireFrame to be saved" , queryValues);
         const payload = {
                 "endpoint": props.endPoint+'/',
                 "query_string": JSON.stringify(props.query),

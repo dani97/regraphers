@@ -4,7 +4,8 @@ import ResponseMutation from '../graphQL/ResponseMutation';
 import {buildClientSchema} from "graphql";
 import { CreateEndPointOperation } from "../graphQL/EndPointOperation";
 import { ListEndPointOperations } from "../graphQL/ListEndPointOperations";
-import { AnnotatedQueryMutation } from "../graphQL/AnnotatedQueryMutation";
+import { CreateWireFrameMutation } from "../graphQL/CreateWireFrameMutation";
+import { CreateAnnotationsMutation } from "../graphQL/CreateAnnotationsMutation";
 
 export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
@@ -72,13 +73,26 @@ export const getGraphQLOperationPayload = (endPoint, query, values) => ({
     variables: values
 })
 
-export const createAnnotatedQueries = (variables) => {
+export const createAnnotations = (payload) => {
     return AwsClient.mutate({
-        mutation: AnnotatedQueryMutation,
-        variables,
+        mutation: CreateAnnotationsMutation,
+        variables: {
+            input: payload
+        },
         fetchPolicy: "no-cache"
     })
-        .then((response) => response)
+        .then((result) => result);
+}
+
+export const createNewWireFrame = (wireFrame) => {
+    return AwsClient.mutate({
+        mutation: CreateWireFrameMutation,
+        variables: {
+            input: wireFrame
+        },
+        fetchPolicy: "no-cache"
+    })
+        .then((result) => result);
 }
 
 export const createTypesObject = (schema) => {

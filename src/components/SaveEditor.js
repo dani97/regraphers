@@ -20,6 +20,7 @@ const SaveEditor = (props) => (
             }}
             validationSchema={querySchema}
             onSubmit={values => {
+                console.log('values are ', values);
                 props.handleSave(values);
             }}>
             {({ errors, touched }) => (
