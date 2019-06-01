@@ -17,14 +17,18 @@ const QueryGrid = (props) => {
     const S3_BASE_URL = 'https://s3.amazonaws.com/';
 
     let [queries, setQueries] = useState([]);
-    let [visible, setVisible] = useState(false);
+    let [visible, setVisible] = useState([]);
 
-    const onOpenModal = () => {
-        setVisible(true);
+    const onOpenModal = (id) => {
+        let visibleState = visible.slice(0);
+        visibleState[id] = true;
+        setVisible(visibleState);
     }
 
-    const onCloseModal= () => {
-        setVisible(false);
+    const onCloseModal= (id) => {
+        let visibleState = visible.slice(0);
+        visibleState[id] = false;
+        setVisible(visibleState);
     }
 
     const handleFileChange = (fileInput, query) => {
@@ -95,6 +99,7 @@ const QueryGrid = (props) => {
                     if(endPointOperations && endPointOperations.items && endPointOperations.items.length) {
                         console.log('before setting to wireFrame  ', endPointOperations.items);
                         setQueries(endPointOperations.items);
+                        setVisible(Array(endPointOperations.items.length).fill(false));
                     }
                 }
             });
@@ -109,7 +114,7 @@ const QueryGrid = (props) => {
             {queries.map((query, index) => (
                 <div className={"secondary-card saved-query"} key={index}>
                     <div className={"secondary-card-main"}>
-                        <div onClick={onOpenModal}>
+                        <div onClick={() => onOpenModal(index)}>
                             <h3>{query.name}</h3>
                             <p>{query.description}</p>
                         </div>
@@ -117,10 +122,10 @@ const QueryGrid = (props) => {
                     <div className={"secondary-card-actions"}>
                         <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files, query)} />
                     </div>
-                    <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
+                    <Modal visible={visible[index]} width="1000" height="550" effect="fadeInUp" onClickAway={() => onCloseModal(index)}>
                         <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
                         <button type={'button'} className={"btn-secondary"} onClick={() => {
-                            onCloseModal();
+                            onCloseModal(index);
                         }}>Cancel</button>
                     </Modal>
                 </div>
