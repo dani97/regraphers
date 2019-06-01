@@ -6,6 +6,7 @@ import Modal from "react-awesome-modal";
 import Message from "./Message";
 import QueryTester from './QueryTester';
 import SaveEditor from './SaveEditor';
+import { Link } from 'react-router-dom';
 
 function combineQueryArgs(query, args, queryType) {
     if(!(Object.keys(query).length === 0
@@ -64,7 +65,7 @@ const QueryViewer = (props) => {
         console.log('payload is ', payload);
         createEndPointOperation(payload).then((result) => {
             console.log(result);
-            onSaveCloseModal();
+          //  onSaveCloseModal();
         });
 
     }
@@ -80,6 +81,7 @@ const QueryViewer = (props) => {
             <button className={"btn-secondary btn-save"} onClick={onSaveOpenModal}> Save </button>
             <Modal visible={saveVisibility} width="400" height="300" effect="fadeInUp" onClickAway={onSaveCloseModal}>
                 <SaveEditor closeModal={onSaveCloseModal} handleSave={handleSave}/>
+                <Link to={'/queries'}>Queries</Link>
             </Modal>
         </div>
     )

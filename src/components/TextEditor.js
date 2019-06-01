@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Autosuggest from 'react-autosuggest';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 import '../styles/TextEditor.css';
+import {connect} from "react-redux";
+import {listEndPointOperations} from "../services/project";
 
 const Inner = styled.div`
   textarea {
@@ -35,28 +37,31 @@ const Button = styled.div`
     background: #eeeeee;
   }
 `
-const people = [
-    {
-        first: 'Charlie',
-        last: 'Brown',
-        twitter: 'dancounsell'
-    },
-    {
-        first: 'Charlotte',
-        last: 'White',
-        twitter: 'mtnmissy'
-    },
-    {
-        first: 'Chloe',
-        last: 'Jones',
-        twitter: 'ladylexy'
-    },
-    {
-        first: 'Cooper',
-        last: 'King',
-        twitter: 'steveodom'
-    }
-];
+// const queryPath = [
+//     {
+//         first: 'Charlie',
+//         last: 'Brown',
+//         twitter: 'dancounsell'
+//     },
+//     {
+//         first: 'Charlotte',
+//         last: 'White',
+//         twitter: 'mtnmissy'
+//     },
+//     {
+//         first: 'Chloe',
+//         last: 'Jones',
+//         twitter: 'ladylexy'
+//     },
+//     {
+//         first: 'Cooper',
+//         last: 'King',
+//         twitter: 'steveodom'
+//     }
+// ];
+
+let suggestionValue = '',
+    queryPaths = [];
 
 const escapeRegexCharacters = (str) => {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -64,12 +69,12 @@ const escapeRegexCharacters = (str) => {
 
 const renderSuggestion = (suggestion, { query }) => {
     console.log('into render suggestion ', suggestion);
-    const suggestionText = `${suggestion.first} ${suggestion.last}`;
+    const suggestionText = `${suggestion}`;
     const matches = AutosuggestHighlightMatch(suggestionText, query);
     const parts = AutosuggestHighlightParse(suggestionText, matches);
 
     return (
-        <span className={'suggestion-content ' + suggestion.twitter}>
+        <span className={'suggestion-content ' + suggestion}>
       <span className="name">
         {
             parts.map((part, index) => {
@@ -85,31 +90,61 @@ const renderSuggestion = (suggestion, { query }) => {
     );
 }
 
-let suggestionValue = '';
+const createJsonPath = (pathString, key, parentValue) => {
+
+    pathString =  pathString + '.' + key;
+
+    if(parentValue[key] == true) {
+        queryPaths.push(pathString);
+        return;
+    }
+    for(const childKey in parentValue[key]) {
+        createJsonPath(pathString, childKey, parentValue[key]);
+    }
+}
 
 class TextEditor extends React.Component
 {
     constructor(props) {
         super(props);
         this.state = {
-            suggestions: people
+            suggestions: queryPaths
         };
+    }
+
+    componentDidMount() {
+        let queryString = (this.props.annotatedQuery)
+            ? this.props.annotatedQuery.query_string
+            : null;
+        console.log('query string is ', queryString);
+        if(queryString) {
+            let queryJson = JSON.parse(queryString);
+            console.log('query json ', queryJson);
+            for(let key in queryJson) {
+                createJsonPath('', key, queryJson)
+            }
+             console.log('query path after ', queryPaths);
+            // this.setState({
+            //     suggestions: queryPaths
+            // });
+        }
+
     }
 
     getSuggestions = (value) => {
         const escapedValue = escapeRegexCharacters(value.trim());
 
         if (escapedValue === '') {
-            return people;
+            return queryPaths;
         }
 
         const regex = new RegExp('\\b' + escapedValue, 'i');
 
-        return people.filter(person => regex.test(this.getSuggestionValue(person)));
+        return queryPaths.filter(queryPath => regex.test(this.getSuggestionValue(queryPath)));
     }
 
-    getSuggestionValue = (suggestion) => {
-        suggestionValue = `${suggestion.first} ${suggestion.last}`;
+    getSuggestionValue = (queryPath) => {
+        suggestionValue = `${queryPath}`;
         return suggestionValue;
     }
 
@@ -125,7 +160,7 @@ class TextEditor extends React.Component
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: people
+            suggestions: queryPaths
         });
     };
 
@@ -161,4 +196,8 @@ class TextEditor extends React.Component
     }
 }
 
-export default TextEditor
+export default connect(
+    state => ({
+        annotatedQuery: (state.query) ? state.query : null
+    }),
+)(TextEditor);

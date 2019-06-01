@@ -2,7 +2,8 @@ import { AwsClient } from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import ResponseMutation from '../graphQL/ResponseMutation';
 import {buildClientSchema} from "graphql";
-import {CreateEndPointOperation} from "../graphQL/EndPointOperation";
+import { CreateEndPointOperation } from "../graphQL/EndPointOperation";
+import { ListEndPointOperations } from "../graphQL/ListEndPointOperations";
 
 export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
@@ -13,6 +14,21 @@ export const getIntrospectionSchema = (endPoint) => {
         fetchPolicy: "cache-first"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
+}
+
+export const listEndPointOperations = (endPoint) => {
+    return AwsClient.query({
+        query: ListEndPointOperations,
+        variables: {
+            "filter" :  {
+                "endpoint" : {
+                    "eq" : endPoint + '/'
+                }
+            }
+        },
+        fetchPolicy: "cache-first"
+    })
+        .then((response) => response);
 }
 
 export const createEndPointOperation = (CreateEndPointInput) => {
