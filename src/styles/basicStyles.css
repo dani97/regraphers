@@ -429,6 +429,11 @@ input[type="checkbox"]:checked ~ .doc-explorer-toggle {
     display: none;
 }
 
+.no-visible {
+    position: absolute;
+    left: -100%;
+}
+
 .loading-mask div {
     display: inline-block;
     margin-top: auto;
