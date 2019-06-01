@@ -493,6 +493,31 @@ input[type="checkbox"]:checked ~ .doc-explorer-toggle {
     border-left: 0px;
 }
 
+.secondary-card.saved-query {
+    margin: 20px auto;
+}
+.saved-query .secondary-card-main {
+    margin-left: 30px;
+    padding: 0;
+    width: 90%;
+}
+.saved-query .secondary-card-main h3{
+    color: var(--primary-color);
+}
+.saved-query .secondary-card-main p{
+    font-size: 15px;
+}
+.saved-query .secondary-card-actions {
+    width: auto;
+}
+
+.saved-query .secondary-card-actions .action.primary {
+    padding: 43px;
+    cursor: pointer;
+    border-bottom-right-radius: 5px;
+    height: auto;
+}
+
 .btn-close-modal {
     position: absolute;
     top: 10px;
