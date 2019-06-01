@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-// import TextEditor from './TextEditor'
+import TextEditor from './TextEditor'
 
 const fadeInScale = keyframes`
   from {
