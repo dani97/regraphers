@@ -15,6 +15,7 @@ const App = (props) => {
     return (
         <div>
             <Provider store={store}>
+            <LoaderComponent/>
                 <Switch>
                     <Route exact path={"/"} component={ProjectGrid} />
                     <Route path={"/projects"} component={ProjectGrid} />
