@@ -21,21 +21,18 @@ const ExploreGrid = (props) => {
             <div className={"title-bar"}>
                 <h2>Select Query Type</h2>
             </div>
-        <div className={"flex-display explore-section"}>
-        {queryTypes.map((type, index) => (
-                <label className = {"query-type secondary-card"} htmlFor={type} key={index} onClick={() => {
-                    props.saveQueryType(type);
-                }}>
-                    <input type="radio" className={"hidden"} id={type} name={"query"}/>
-                    <span className="radio-mark"/>
-                    <h2>{type}</h2>
-                </label>
-            )
-        )}
-        </div>
-        <h3 className={"text-center"}>
-            <Link to="/queryBuilder"><span className={"btn-primary no-text-decor"}>Proceed</span></Link>
-        </h3>
+            <div className={"flex-display explore-section"}>
+                {queryTypes.map((type, index) => (
+                        <label className = {"query-type secondary-card"} htmlFor={type} key={index} onClick={() => {
+                            props.saveQueryType(type);
+                        }}>
+                            <input type="radio" className={"hidden"} id={type} name={"query"}/>
+                            <span className="radio-mark"/>
+                            <h2>{type}</h2>
+                        </label>
+                    )
+                )}
+            </div>
         </div>
 )}
 

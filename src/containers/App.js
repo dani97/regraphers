@@ -22,9 +22,9 @@ const App = (props) => {
                 <Switch>
                     <Route exact path={"/"} component={ProjectGrid} />
                     <Route path={"/projects"} component={ProjectGrid} />
-                    <Route exact path={"/explore"} render={() => <ExploreGrid />} />
-                    <Route exact path={"/queryBuilder"} render={() => <QueryBuilder/>} />
-                    <Route exact path={"/queries"} render={() => <QueryGrid />} />
+                    <Route exact path={"/explore"} render={(props) => <ExploreGrid routerProps={props}/>} />
+                    <Route exact path={"/queryBuilder"} render={(props) => <QueryBuilder routerProps={props}/>} />
+                    <Route exact path={"/queries"} render={(props) => <QueryGrid routerProps={props} />} />
                     <Route exact path={"/page"} component={Page} />
                     <Route exact path={"/wireFrame"} render={() => <WireFrame />} />
                 </Switch>

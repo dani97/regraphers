@@ -65,9 +65,9 @@ const QueryViewer = (props) => {
         console.log('payload is ', payload);
         createEndPointOperation(payload).then((result) => {
             console.log(result);
-          //  onSaveCloseModal();
+            onSaveCloseModal();
+            props.routerProps.history.push('/queries');
         });
-
     }
     return (
         <div className={"overflow-section"}>
@@ -81,7 +81,6 @@ const QueryViewer = (props) => {
             <button className={"btn-secondary btn-save"} onClick={onSaveOpenModal}> Save </button>
             <Modal visible={saveVisibility} width="400" height="300" effect="fadeInUp" onClickAway={onSaveCloseModal}>
                 <SaveEditor closeModal={onSaveCloseModal} handleSave={handleSave}/>
-                <Link to={'/queries'}>Queries</Link>
             </Modal>
         </div>
     )

@@ -57,13 +57,11 @@ const QueryGrid = (props) => {
                     </Modal>
                     <button onClick={() => {
                         props.saveAnnotatedQuery(query);
+                        props.routerProps.history.push('/wireFrame');
                     }}>Annotate</button>
                 </div>
                 )
             )}
-            <Link to={'/wireFrame'}>
-                <h3>Proceed to Annotate</h3>
-            </Link>
         </div>);
 }
 

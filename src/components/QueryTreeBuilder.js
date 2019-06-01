@@ -32,7 +32,7 @@ const QueryTreeBuilder = (props) => {
             </div>
             <div className={"half height-500"}>
                 <h2 className={"mt-10 section-title"}>Result JSON Structure</h2>
-                <QueryViewer query = {query} args={args} endPoint={props.endPoint}/>
+                <QueryViewer query = {query} args={args} endPoint={props.endPoint} routerProps={props.routerProps}/>
             </div>
         </div>
     );
