@@ -29,7 +29,7 @@ const QueryTester = (props) => {
             }
         }
         else {
-            initialValues[arg.name] = '';
+            initialValues[arg.name] = {};
         }
     });
 
@@ -79,9 +79,9 @@ const QueryTester = (props) => {
                 initialValues={initialValues}
                 onSubmit= {(values) => {
                         console.log('values are ', values);
-                        let query = "query cmsPage($id : Int) { cmsPage(id: $id) { content } }";
-                            values = "{ \"id\": 3}";
-                        let payload = getGraphQLOperationPayload(props.endPoint, query, values);
+                      //  let query = "query cmsPage($id : Int) { cmsPage(id: $id) { content } }";
+                        //    values = "{ \"id\": 3}";
+                        let payload = getGraphQLOperationPayload(props.endPoint, props.query, JSON.stringify(values));
                         console.log('payload is ', payload);
                         executeGraphqlOperation(payload).then((result) => {
                             if(result && result.data && result.data.executeGraphqlOperation) {
@@ -104,6 +104,7 @@ const QueryTester = (props) => {
                         {
                             props.args.map((arg,index) => (
                                 <Fragment key={index}>
+                                    <label>{arg.name} : </label>
                                     {getInput(arg, handleChange)}
                                 </Fragment>
                             ))
