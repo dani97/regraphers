@@ -107,15 +107,15 @@ const QueryGrid = (props) => {
                 <h2>Saved Queries</h2>
             </div>
             {queries.map((query, index) => (
-                <div className={"secondary-card saved-wireFrame"} key={index}>
+                <div className={"secondary-card saved-query"} key={index}>
                     <div className={"secondary-card-main"}>
                         <div onClick={onOpenModal}>
                             <h3>{query.name}</h3>
                             <p>{query.description}</p>
                         </div>
-
-                            <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files, query)} />
-
+                    </div>
+                    <div className={"secondary-card-actions"}>
+                        <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files, query)} />
                     </div>
                     <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                         <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
