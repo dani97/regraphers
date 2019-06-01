@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import { project } from './reducers/project';
 import { message} from "./reducers/message";
 import { queryType } from "./reducers/queryType";
+import {loader} from "./reducers/loader";
 import { query } from "./reducers/query";
 
 const reducers = combineReducers({
     project: project,
     messages: message,
     queryType: queryType,
+    loaderVisibility: loader,
     query: query
 })
 

@@ -53,18 +53,18 @@ const QueryTester = (props) => {
                 const inputType = arg.type.name;
                 switch (inputType) {
                     case 'Int':
-                        return <input type = "number" name={arg.name} onChange={handleChange}/>;
+                        return <input type = "number" className={"mb-20"} name={arg.name} onChange={handleChange}/>;
                     case 'Float':
-                        return <input type = "number" step = 'any' name={arg.name} onChange={handleChange}/>;
+                        return <input type = "number" step = 'any' className={"mb-20"} name={arg.name} onChange={handleChange}/>;
                     case 'Boolean':
-                        return <input type = "checkbox" name={arg.name} onChange={handleChange} />;
+                        return <input type = "checkbox" className={"mb-20"} name={arg.name} onChange={handleChange} />;
                     default:
-                        return <input name={arg.name} onChange={handleChange} />;
+                        return <input type="text" className={"mb-20"} name={arg.name} onChange={handleChange} />;
                 }
             }
         }
         else {
-            return <textarea name={arg.name} onChange={handleChange}></textarea>
+            return <textarea name={arg.name} placeholder={arg.name} className={"mb-20"} onChange={handleChange}></textarea>
         }
     }
 
@@ -100,29 +100,31 @@ const QueryTester = (props) => {
                       isSubmitting,
                       /* and other goodies */
                   }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form className={"args-form"} onSubmit={handleSubmit}>
                         {
                             props.args.map((arg,index) => (
                                 <Fragment key={index}>
-                                    <label>{arg.name}</label>
                                     {getInput(arg, handleChange)}
-                                    <br></br>
                                 </Fragment>
                             ))
                         }
-                        <p>{JSON.stringify(values)}</p>
 
 
                         <button className={"btn-play"} type="submit" disabled={isSubmitting}>
-                            Submit
+                            <svg width="35" height="35" viewBox="3.5,4.5,24,24"><path d="M 11 9 L 24 16 L 11 23 z"></path></svg>
                         </button>
-                        <button type={'button'} onClick={closeModal}>Cancel</button>
+
+                        <button type={'button'} className={"btn-primary fixed-right"} onClick={() => {
+                            props.handleSave();
+                        }}>Save</button>
+
+                        <button type={'button'} className={"btn-secondary fixed-right"} onClick={closeModal}>Cancel</button>
                     </form>
                 )
 
                 }
             </Formik>
-            <div>
+            <div className={"test-sample-response"}>
                 <pre dangerouslySetInnerHTML={{__html: graphQLResult}}></pre>
             </div>
         </div>
