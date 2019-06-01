@@ -41,9 +41,12 @@ const QueryGrid = (props) => {
 
     return (
         <div>
+            <div className={"title-bar"}>
+                <h2>Saved Queries</h2>
+            </div>
             {queries.map((query, index) => (
-                <div key={index}>
-                    <div onClick={onOpenModal}>
+                <div className={"secondary-card saved-query"} key={index}>
+                    <div className={"secondary-card-main"} onClick={onOpenModal}>
                         <div>
                             <h3>{query.name}</h3>
                             <p>{query.description}</p>
@@ -55,10 +58,12 @@ const QueryGrid = (props) => {
                             onCloseModal();
                         }}>Cancel</button>
                     </Modal>
-                    <button onClick={() => {
+                    <div className={"secondary-card-actions"}>
+                    <button className={"action primary"} onClick={() => {
                         props.saveAnnotatedQuery(query);
                         props.routerProps.history.push('/wireFrame');
                     }}>Annotate</button>
+                    </div>
                 </div>
                 )
             )}

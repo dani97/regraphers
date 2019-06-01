@@ -302,6 +302,85 @@ h3.text-center a {
     color: var(--secondary-color);
 }
 
+div.doc-explorer {
+    width: 0%;
+    overflow: hidden;
+    right: 0%;
+    position: absolute;
+    z-index: 1;
+    top: 180px;
+    height: 450px;
+    padding: 0px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    transition: width 0.5s ease;
+    background-color: var(--secondary-color);
+}
+
+input[type="checkbox"]:checked ~ div.doc-explorer {
+    width: 50%;
+    border: 1px solid var(--header-color);
+    border-right: 0px;
+    border-bottom-left-radius: 5px;
+}
+
+input[type="checkbox"] ~ .doc-explorer .doc-explorer-contents {
+    width: 95%;
+    height: 370px;
+    overflow: auto;
+    padding: 15px;
+    overflow-x: hidden;
+}
+
+input[type="checkbox"] ~ .doc-explorer-toggle {
+    transform: rotate(270deg);
+    padding: 10px 20px;
+    border: 1px solid var(--header-color);
+    background-color: var(--header-color);
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    right: -20px;
+    top: 200px;
+    transition: right 0.5s ease;
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+input[type="checkbox"] ~ .doc-explorer-toggle:hover {
+    background-color: var(--secondary-color);
+    color: var(--header-color);
+}
+
+input[type="checkbox"]:checked ~ .doc-explorer-toggle {
+    right: calc(50% - 20px);
+}
+
+.doc-category-item .field-name {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.doc-explorer-back {
+    position: absolute;
+    padding-top: 15px;
+    padding-left: 40px;
+    color: var(--header-color);
+    cursor: pointer;
+}
+
+.doc-explorer-back::before {
+    content: '<';
+    color: var(--header-color);
+}
+
+.type-name {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
 .control .error {
     width: 85%;
     margin-bottom: -45px;
@@ -412,6 +491,31 @@ h3.text-center a {
     color: var(--primary-color);
     border: 1px solid var(--card-border-color);
     border-left: 0px;
+}
+
+.secondary-card.saved-query {
+    margin: 20px auto;
+}
+.saved-query .secondary-card-main {
+    margin-left: 30px;
+    padding: 0;
+    width: 90%;
+}
+.saved-query .secondary-card-main h3{
+    color: var(--primary-color);
+}
+.saved-query .secondary-card-main p{
+    font-size: 15px;
+}
+.saved-query .secondary-card-actions {
+    width: auto;
+}
+
+.saved-query .secondary-card-actions .action.primary {
+    padding: 43px;
+    cursor: pointer;
+    border-bottom-right-radius: 5px;
+    height: auto;
 }
 
 .btn-close-modal {
