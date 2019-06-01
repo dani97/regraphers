@@ -1,9 +1,10 @@
-import { AwsClient } from "../AwsClient";
+import  AwsClient from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import ResponseMutation from '../graphQL/ResponseMutation';
 import {buildClientSchema} from "graphql";
 import { CreateEndPointOperation } from "../graphQL/EndPointOperation";
 import { ListEndPointOperations } from "../graphQL/ListEndPointOperations";
+import { AnnotatedQueryMutation } from "../graphQL/AnnotatedQueryMutation";
 
 export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
@@ -67,6 +68,15 @@ export const getGraphQLOperationPayload = (endPoint, query, values) => ({
     query,
     variables: values
 })
+
+export const createAnnotatedQueries = (variables) => {
+    return AwsClient.mutate({
+        mutation: AnnotatedQueryMutation,
+        variables,
+        fetchPolicy: "no-cache"
+    })
+        .then((response) => response)
+}
 
 export const createTypesObject = (schema) => {
     if(!schema) return {};
