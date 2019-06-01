@@ -581,7 +581,8 @@ input[type="number"] {
     margin-left: 30px;
     padding: 0;
     width: 90%;
-    border-right: none;
+    height: 100px;
+    border-right: 1px solid var(--card-border-color);
 }
 .saved-query .secondary-card-main h3,
 .sample-response-container h3,
@@ -637,6 +638,19 @@ span.name {
 
 input[type="radio"]:checked ~ h2 {
     color: var(--primary-color);
+}
+
+input[type="file"] {
+    padding-top: 40px;
+    padding-left: 30px;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.ml-30 {
+    margin-left: 30px;
 }
 
 @-webkit-keyframes zoomIn {

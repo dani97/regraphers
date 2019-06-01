@@ -49,7 +49,7 @@ class WireFrame extends Component {
                                                           onChange={this.onChange}
                                                           onSubmit={this.onSubmit}/>
                     )}/>
-                <button type={'submit'} className={"btn-primary"} value={'Save'} onClick={() => {
+                <button type={'submit'} className={"btn-primary mt-15 ml-30"} value={'Save'} onClick={() => {
                     let payload = {
                         query_id: (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
                         annotationsList: (this.state.annotations) ? JSON.stringify(this.state.annotations) : '[]'
@@ -58,7 +58,7 @@ class WireFrame extends Component {
                     createAnnotations(payload).then((result) =>  {
                         console.log('result is ', result);
                     })
-                }}/>
+                }}>Save</button>
             </div>
         )
     }
