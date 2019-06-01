@@ -33,7 +33,7 @@ const QueryTester = (props) => {
         }
     });
 
-    let [graphQLResult, setGraphQLResult] = useState(''),
+    let [graphQLResult, setGraphQLResult] = useState('{}'),
         [visible, setVisible] = useState(false);
 
     const onOpenModal = () => {
@@ -74,7 +74,7 @@ const QueryTester = (props) => {
 
     return (
         <div className={"modal-container"}>
-            <h2 className={"modal-header"}>Args List</h2>
+            <h2 className={"modal-header"}>Test Query</h2>
             <Formik
                 initialValues={initialValues}
                 onSubmit= {(values) => {
@@ -106,6 +106,7 @@ const QueryTester = (props) => {
                       /* and other goodies */
                   }) => (
                     <form className={"args-form"} onSubmit={handleSubmit}>
+                        <h3 className={"mb-20 mt-0"}>Args List</h3>
                         {
                             props.args.map((arg,index) => (
                                 <Fragment key={index}>
@@ -120,18 +121,17 @@ const QueryTester = (props) => {
                             <svg width="35" height="35" viewBox="3.5,4.5,24,24"><path d="M 11 9 L 24 16 L 11 23 z"></path></svg>
                         </button>
 
-                        <button type={'button'} className={"btn-primary fixed-right"} onClick={() => {
-                            props.handleSave();
-                        }}>Save</button>
-
-                        <button type={'button'} className={"btn-secondary fixed-right"} onClick={closeModal}>Cancel</button>
+                        <button type={'button'} className={"btn-secondary fixed-right close"} onClick={closeModal}>X</button>
                     </form>
                 )
 
                 }
             </Formik>
-            <div className={"test-sample-response"}>
-                <pre dangerouslySetInnerHTML={{__html: graphQLResult}}></pre>
+            <div className={"sample-response-container"}>
+                <h3 className={"mb-20 mt-0"}>Sample Response</h3>
+                <div className={"test-sample-response"}>
+                    <pre dangerouslySetInnerHTML={{__html: JSON.stringify(JSON.parse(graphQLResult),null,2)}}></pre>
+                </div>
             </div>
         </div>
     );

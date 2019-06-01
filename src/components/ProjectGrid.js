@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Modal from 'react-awesome-modal';
 import CreateProject from "./CreateProject";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Message from "./Message";
 import './../styles/basicStyles.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,22 +39,22 @@ console.log('props in project grid is ', props);
                     <div className={"secondary-card"}>
                         <div className={"secondary-card-main"}>Project 1</div>
                         <div className={"secondary-card-actions"}>
-                            <div className={"action primary"}>Edit</div>
-                            <div className={"action"}>Delete</div>
+                            <div className={"action primary"}><FontAwesomeIcon icon={faPencilAlt}/> Edit</div>
+                            <div className={"action"}><FontAwesomeIcon icon={faTrash}/> Delete</div>
                         </div>
                     </div>
                     <div className={"secondary-card"}>
                         <div className={"secondary-card-main"}>Project 2</div>
                         <div className={"secondary-card-actions"}>
-                            <div className={"action primary"}>Edit</div>
-                            <div className={"action"}>Delete</div>
+                            <div className={"action primary"}><FontAwesomeIcon icon={faPencilAlt}/> Edit</div>
+                            <div className={"action"}><FontAwesomeIcon icon={faTrash}/> Delete</div>
                         </div>
                     </div>
                     <div className={"secondary-card"}>
                         <div className={"secondary-card-main"}>Project 3</div>
                         <div className={"secondary-card-actions"}>
-                            <div className={"action primary"}>Edit</div>
-                            <div className={"action"}>Delete</div>
+                            <div className={"action primary"}><FontAwesomeIcon icon={faPencilAlt}/> Edit</div>
+                            <div className={"action"}><FontAwesomeIcon icon={faTrash}/> Delete</div>
                         </div>
                     </div>
                 </div>
