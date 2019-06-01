@@ -40,8 +40,12 @@ const QueryViewer = (props) => {
 
     const copyToClipboard = (event) => {
         let textContent = queryViewerRef.current.textContent,
+        textArea = document.getElementById("resultJsonText");
+        if(!textArea) {
             textArea = document.createElement('textarea');
-
+            textArea.setAttribute("id", "resultJsonText");
+            textArea.setAttribute("class", "no-visible");
+        }
         textArea.textContent = textContent;
         document.body.append(textArea);
         textArea.select();
