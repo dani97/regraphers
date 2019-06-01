@@ -29,7 +29,7 @@ const ExploreGrid = (props) => {
                         }}>
                             <input type="radio" className={"hidden"} id={type} name={"query"}/>
                             <span className="radio-mark"/>
-                            <h2>{type}</h2>
+                            <h3>{type}</h3>
                         </label>
                     )
                 )}

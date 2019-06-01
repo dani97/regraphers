@@ -14,6 +14,8 @@ const QueryBuilder = (props) => {
             </div>
             <EndPoint endPoint = {props.endPoint}/>
             <QueryTreeBuilder schema = {props.schema} endPoint = {props.endPoint} queryType = {props.queryType} routerProps={props.routerProps} />
+            <input type="checkbox" className={"hidden"} id={"doc-explorer"}/>
+            <label className="doc-explorer-toggle" htmlFor={"doc-explorer"}>DOCS</label>
             <DocExplorer schema = {buildClientSchema(props.schema)} />
         </div>
     )

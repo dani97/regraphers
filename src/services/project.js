@@ -4,7 +4,8 @@ import ResponseMutation from '../graphQL/ResponseMutation';
 import {buildClientSchema} from "graphql";
 import { CreateEndPointOperation } from "../graphQL/EndPointOperation";
 import { ListEndPointOperations } from "../graphQL/ListEndPointOperations";
-import { AnnotatedQueryMutation } from "../graphQL/AnnotatedQueryMutation";
+import { CreateWireFrameMutation } from "../graphQL/CreateWireFrameMutation";
+import { CreateAnnotationsMutation } from "../graphQL/CreateAnnotationsMutation";
 
 export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
@@ -12,22 +13,25 @@ export const getIntrospectionSchema = (endPoint) => {
         variables: {
             endPoint: endPoint
         },
-        fetchPolicy: "cache-first"
+        fetchPolicy: "no-cache"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
 
 export const listEndPointOperations = (endPoint) => {
+    if(endPoint.slice(-1) != '/') {
+        endPoint = endPoint + '/';
+    }
     return AwsClient.query({
         query: ListEndPointOperations,
         variables: {
             "filter" :  {
                 "endpoint" : {
-                    "eq" : endPoint + '/'
+                    "eq" : endPoint
                 }
             }
         },
-        fetchPolicy: "cache-first"
+        fetchPolicy: "no-cache"
     })
         .then((response) => response);
 }
@@ -58,7 +62,7 @@ export const saveEndPointOperation = (endPoint) => {
         variables: {
             endPoint: endPoint
         },
-        fetchPolicy: "cache-only"
+        fetchPolicy: "no-cache"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
@@ -69,13 +73,26 @@ export const getGraphQLOperationPayload = (endPoint, query, values) => ({
     variables: values
 })
 
-export const createAnnotatedQueries = (variables) => {
+export const createAnnotations = (payload) => {
     return AwsClient.mutate({
-        mutation: AnnotatedQueryMutation,
-        variables,
+        mutation: CreateAnnotationsMutation,
+        variables: {
+            input: payload
+        },
         fetchPolicy: "no-cache"
     })
-        .then((response) => response)
+        .then((result) => result);
+}
+
+export const createNewWireFrame = (wireFrame) => {
+    return AwsClient.mutate({
+        mutation: CreateWireFrameMutation,
+        variables: {
+            input: wireFrame
+        },
+        fetchPolicy: "no-cache"
+    })
+        .then((result) => result);
 }
 
 export const createTypesObject = (schema) => {

@@ -33,11 +33,11 @@ const QueryTester = (props) => {
         }
     });
 
-    let [graphQLResult, setGraphQLResult] = useState(''),
+    let [graphQLResult, setGraphQLResult] = useState('{}'),
         [visible, setVisible] = useState(false);
 
     const onOpenModal = () => {
-        console.log('into open modal in query tester');
+        console.log('into open modal in wireFrame tester');
         setVisible(true);
     }
 
@@ -64,7 +64,7 @@ const QueryTester = (props) => {
             }
         }
         else {
-            return <textarea name={arg.name} placeholder={arg.name} className={"mb-20"} onChange={handleChange}></textarea>
+            return <textarea name={arg.name} className={"mb-20"} onChange={handleChange}></textarea>
         }
     }
 
@@ -74,20 +74,25 @@ const QueryTester = (props) => {
 
     return (
         <div className={"modal-container"}>
-            <h2 className={"modal-header"}>Args List</h2>
+            <h2 className={"modal-header"}>Test Query</h2>
             <Formik
                 initialValues={initialValues}
                 onSubmit= {(values) => {
+                        props.showLoader(true);
                         console.log('values are ', values);
-                        let query = "query cmsPage($id : Int) { cmsPage(id: $id) { content } }";
-                            values = "{ \"id\": 3}";
-                        let payload = getGraphQLOperationPayload(props.endPoint, query, values);
+                      //  let query = "query cmsPage($id : Int) { cmsPage(id: $id) { content } }";
+                        //    values = "{ \"id\": 3}";
+                        let payload = getGraphQLOperationPayload(props.endPoint, props.query, JSON.stringify(values));
                         console.log('payload is ', payload);
                         executeGraphqlOperation(payload).then((result) => {
                             if(result && result.data && result.data.executeGraphqlOperation) {
                                 setGraphQLResult(result.data.executeGraphqlOperation);
                             }
-                        });
+                            props.showLoader(false);
+                        },
+                           error => {
+                                props.showLoader(false);
+                       });
                     }
                 }>
                 {({
@@ -101,9 +106,11 @@ const QueryTester = (props) => {
                       /* and other goodies */
                   }) => (
                     <form className={"args-form"} onSubmit={handleSubmit}>
+                        <h3 className={"mb-20 mt-0"}>Args List</h3>
                         {
                             props.args.map((arg,index) => (
                                 <Fragment key={index}>
+                                    <label>{arg.name} : </label>
                                     {getInput(arg, handleChange)}
                                 </Fragment>
                             ))
@@ -114,18 +121,17 @@ const QueryTester = (props) => {
                             <svg width="35" height="35" viewBox="3.5,4.5,24,24"><path d="M 11 9 L 24 16 L 11 23 z"></path></svg>
                         </button>
 
-                        <button type={'button'} className={"btn-primary fixed-right"} onClick={() => {
-                            props.handleSave();
-                        }}>Save</button>
-
-                        <button type={'button'} className={"btn-secondary fixed-right"} onClick={closeModal}>Cancel</button>
+                        <button type={'button'} className={"btn-secondary fixed-right close"} onClick={closeModal}>X</button>
                     </form>
                 )
 
                 }
             </Formik>
-            <div className={"test-sample-response"}>
-                <pre dangerouslySetInnerHTML={{__html: graphQLResult}}></pre>
+            <div className={"sample-response-container"}>
+                <h3 className={"mb-20 mt-0"}>Sample Response</h3>
+                <div className={"test-sample-response"}>
+                    <pre dangerouslySetInnerHTML={{__html: JSON.stringify(JSON.parse(graphQLResult),null,2)}}></pre>
+                </div>
             </div>
         </div>
     );

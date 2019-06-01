@@ -70,6 +70,9 @@ function createJsonPath(pathString, key,parentValue)  {
     pathString =  pathString + '_' + key;
 
     if(parentValue[key] == true) {
+        if(pathString.charAt(0) === '_') {
+            pathString = pathString.substr(1);
+        }
         queryPaths.push(pathString);
         return;
     }
@@ -112,9 +115,9 @@ class TextEditor extends React.Component
                 suggestions: queryPaths
             });
 
-            console.log('query path is ', queryPaths);
+            console.log('wireFrame path is ', queryPaths);
         }
-        console.log('annotated query after', this.props.annotatedQuery);
+        console.log('annotated wireFrame after', this.props.annotatedQuery);
     }
 
     getSuggestions = (value) => {

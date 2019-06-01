@@ -20,18 +20,19 @@ const SaveEditor = (props) => (
             }}
             validationSchema={querySchema}
             onSubmit={values => {
+                console.log('values are ', values);
                 props.handleSave(values);
             }}>
             {({ errors, touched }) => (
-                <Form>
+                <Form className={"save-query-form"}>
                     <div>
-                        <Field className={"mt-10"} type="text" name="queryName" placeholder="Query Name" required={"required"} />
+                        <Field className={"mb-20"} type="text" name="queryName" placeholder="Query Name" required={"required"} />
                     </div>
                     <div>
-                        <Field type="text" className={"mt-10"} placeholder="Description" name="description" component="textarea" />
+                        <Field type="text" className={"save-text-area"} placeholder="Description" name="description" component="textarea" />
                     </div>
                     <div>
-                        <Field type="text" className={"mt-10"} placeholder="page" name="page" />
+                        <Field type="text" placeholder="page" name="page" />
                     </div>
                     <div className={"flex-display mt-20"}>
                         <button type={'submit'} className={"btn-primary"}>Submit</button>

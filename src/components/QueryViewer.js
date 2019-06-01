@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { jsonToGraphQLQuery, VariableType } from 'json-to-graphql-query';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { createEndPointOperation} from "../services/project";
 import {connect} from "react-redux";
 import Modal from "react-awesome-modal";
 import Message from "./Message";
 import QueryTester from './QueryTester';
 import SaveEditor from './SaveEditor';
-import { Link } from 'react-router-dom';
+import {showLoader} from "../actions/loader";
 
 function combineQueryArgs(query, args, queryType) {
+    console.log(query, args, queryType);
     if(!(Object.keys(query).length === 0
         && query.constructor === Object)) {
         query = {"query": query};
@@ -40,8 +43,12 @@ const QueryViewer = (props) => {
 
     const copyToClipboard = (event) => {
         let textContent = queryViewerRef.current.textContent,
+        textArea = document.getElementById("resultJsonText");
+        if(!textArea) {
             textArea = document.createElement('textarea');
-
+            textArea.setAttribute("id", "resultJsonText");
+            textArea.setAttribute("class", "no-visible");
+        }
         textArea.textContent = textContent;
         document.body.append(textArea);
         textArea.select();
@@ -68,7 +75,8 @@ const QueryViewer = (props) => {
     }
 
     const handleSave = (queryValues) => {
-        console.log("query to be saved" , queryValues);
+        props.showLoader(true);
+        console.log("wireFrame to be saved" , queryValues);
         const payload = {
                 "endpoint": props.endPoint+'/',
                 "query_string": JSON.stringify(props.query),
@@ -80,8 +88,12 @@ const QueryViewer = (props) => {
         console.log('payload is ', payload);
         createEndPointOperation(payload).then((result) => {
             console.log(result);
+            props.showLoader(false);
             onSaveCloseModal();
             props.routerProps.history.push('/queries');
+        },
+            error => {
+                props.showLoader(false);
         });
     }
     return (
@@ -91,8 +103,8 @@ const QueryViewer = (props) => {
                     /* Logical shortcut for only displaying the
                        button if the copy command exists */
                     document.queryCommandSupported('copy') &&
-                    <div>
-                        <button onClick={copyToClipboard}>Copy</button>
+                    <div className={"copy-status"}>
+                        <button className={"btn-secondary copy-json"} onClick={copyToClipboard}><FontAwesomeIcon icon={faCopy}/></button>
                         {copySuccess}
                     </div>
                 }
@@ -101,7 +113,7 @@ const QueryViewer = (props) => {
             <button className={"btn-primary btn-test"} onClick={onOpenModal}> Test </button>
             <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                 <Message/>
-                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} />
+                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} showLoader={props.showLoader} />
             </Modal>
 
             <button className={"btn-secondary btn-save"} onClick={onSaveOpenModal}> Save </button>
@@ -116,5 +128,6 @@ export default connect(
     state => ({
         endPoint: state.project.endPoint,
         queryType: state.queryType
-    })
+    }),
+    {showLoader}
 )(QueryViewer);

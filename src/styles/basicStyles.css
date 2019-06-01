@@ -145,6 +145,26 @@ input[type="text"] {
     right: 150px;
 }
 
+.btn-secondary.fixed-right.close {
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    padding: 10px 15px 10px 13px;
+    color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    bottom: unset;
+}
+
+.btn-secondary.fixed-right.close:hover {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
 .mb-20 {
     margin-bottom: 20px;
 }
@@ -163,13 +183,25 @@ h3.text-center a {
     width: 40%;
     display: inline-block;
 }
-.test-sample-response {
+
+.sample-response-container {
     display: inline-block;
     width: 45%;
-    overflow: auto;
     float: right;
     margin: 30px 20px 20px 20px;
     max-height: 400px;
+}
+
+.test-sample-response {
+    overflow: auto;
+    border: 1px solid var(--card-border-color);
+    padding: 20px;
+    border-radius: 5px;
+    height: 300px;
+}
+
+.test-sample-response pre {
+    white-space: pre-wrap;
 }
 
 .query-type {
@@ -189,7 +221,7 @@ h3.text-center a {
     transform: scale(1);
 }
 
-.query-type.secondary-card h2 {
+.query-type.secondary-card h3 {
     margin: 40px;
 }
 
@@ -302,6 +334,104 @@ h3.text-center a {
     color: var(--secondary-color);
 }
 
+div.doc-explorer {
+    width: 0%;
+    overflow: hidden;
+    right: 0%;
+    position: absolute;
+    z-index: 1;
+    top: 180px;
+    height: 450px;
+    padding: 0px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    transition: width 0.5s ease;
+    background-color: var(--secondary-color);
+}
+
+input[type="checkbox"]:checked ~ div.doc-explorer {
+    width: 50%;
+    border: 1px solid var(--header-color);
+    border-right: 0px;
+    border-bottom-left-radius: 5px;
+}
+
+input[type="checkbox"] ~ .doc-explorer .doc-explorer-contents {
+    width: 95%;
+    height: 370px;
+    overflow: auto;
+    padding: 15px;
+    overflow-x: hidden;
+}
+
+input[type="checkbox"] ~ .doc-explorer-toggle {
+    transform: rotate(270deg);
+    padding: 10px 20px;
+    border: 1px solid var(--header-color);
+    background-color: var(--header-color);
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    right: -20px;
+    top: 200px;
+    transition: right 0.5s ease;
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+input[type="checkbox"] ~ .doc-explorer-toggle:hover {
+    background-color: var(--secondary-color);
+    color: var(--header-color);
+}
+
+input[type="checkbox"]:checked ~ .doc-explorer-toggle {
+    right: calc(50% - 20px);
+}
+
+input[type="number"] {
+    display: block;
+    width: 92%;
+    padding: 8px;
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+}
+
+.modal-container .save-text-area {
+    padding: 10px 0px 10px 10px;
+    height: 17px;
+    width: 93%;
+    margin-bottom: 16px;
+}
+
+.modal-container .save-query-form {
+    padding: 20px;
+}
+
+.doc-category-item .field-name {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.doc-explorer-back {
+    position: absolute;
+    padding-top: 15px;
+    padding-left: 40px;
+    color: var(--header-color);
+    cursor: pointer;
+}
+
+.doc-explorer-back::before {
+    content: '<';
+    color: var(--header-color);
+}
+
+.type-name {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
 .control .error {
     width: 85%;
     margin-bottom: -45px;
@@ -350,6 +480,11 @@ h3.text-center a {
     display: none;
 }
 
+.no-visible {
+    position: absolute;
+    left: -100%;
+}
+
 .loading-mask div {
     display: inline-block;
     margin-top: auto;
@@ -388,11 +523,36 @@ h3.text-center a {
 }
 
 .endpoint-wrapper input {
-    width: 85%;
+    width: 39%;
+}
+
+.copy-json {
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.copy-status {
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+}
+
+.copy-json.btn-secondary {
+    color: var(--secondary-color);
+    background-color: var(--header-color);
+}
+
+.copy-json.btn-secondary:hover {
+    color: var(--header-color);
+    background-color: var(--secondary-color);
 }
 
 .darker-bg {
     margin-top: 30px;
+}
+
+.mt-0 {
+    margin-top: 0px;
 }
 
 .mt-10 {
@@ -412,6 +572,54 @@ h3.text-center a {
     color: var(--primary-color);
     border: 1px solid var(--card-border-color);
     border-left: 0px;
+}
+
+.secondary-card.saved-query {
+    margin: 20px auto;
+}
+.saved-query .secondary-card-main {
+    margin-left: 30px;
+    padding: 0;
+    width: 90%;
+    border-right: none;
+}
+.saved-query .secondary-card-main h3,
+.sample-response-container h3,
+.args-form h3 {
+    color: var(--primary-color);
+}
+.saved-query .secondary-card-main p{
+    font-size: 15px;
+}
+.saved-query .secondary-card-actions {
+    width: auto;
+}
+
+.saved-query .secondary-card-actions .action.primary {
+    padding: 43px;
+    cursor: pointer;
+    border-bottom-right-radius: 5px;
+    background-color: var(--secondary-color);
+    height: auto;
+}
+
+.saved-query .secondary-card-actions .action.primary:hover {
+    background-color: var(--header-color);
+}
+
+.react-autosuggest__container--open div.react-autosuggest__suggestions-container {
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.react-autosuggest__container--open .react-autosuggest__input {
+    width: 380px;
+}
+
+span.name {
+    margin-left: 0px;
 }
 
 .btn-close-modal {
@@ -451,4 +659,8 @@ input[type="radio"]:checked ~ h2 {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.secondary-card-main {
+    display: flex;
 }
