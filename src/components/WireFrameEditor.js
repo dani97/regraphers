@@ -40,25 +40,24 @@ function WireFrameEditor (props) {
                 left: `${geometry.x}%`,
                 top: `${geometry.y + geometry.height}%`,
                 ...props.style
-            }}
-        >
-            {/*<TextEditor*/}
-            {/*    onChange={value => props.onChange({*/}
-            {/*        ...props.annotation,*/}
-            {/*        data: {*/}
-            {/*            ...props.annotation.data,*/}
-            {/*            text: value*/}
-            {/*        }*/}
-            {/*    })}*/}
-            {/*    onSubmit={value => props.onSubmit({*/}
-            {/*        ...props.annotation,*/}
-            {/*        data: {*/}
-            {/*            ...props.annotation.data,*/}
-            {/*            text: value*/}
-            {/*        }*/}
-            {/*    })}*/}
-            {/*    value={props.annotation.data && props.annotation.data.text}*/}
-            {/*/>*/}
+            }}>
+            <TextEditor
+                onChange={value => props.onChange({
+                    ...props.annotation,
+                    data: {
+                        ...props.annotation.data,
+                        text: value
+                    }
+                })}
+                onSubmit={value => props.onSubmit({
+                    ...props.annotation,
+                    data: {
+                        ...props.annotation.data,
+                        text: value
+                    }
+                })}
+                value={props.annotation.data && props.annotation.data.text}
+            />
         </Container>
     )
 }
