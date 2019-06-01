@@ -38,18 +38,19 @@ const CreateProject = (props) => (
                 <Form>
                     <Message/>
                     <div className={'control'}>
-                        <Field name="projectName" placeholder={"Project Name"}  />
-                        <ErrorMessage name="projectName" />
+                        <Field type="text" name="projectName" placeholder={"Project Name"}  />
+                        <ErrorMessage className={"error"} name="projectName" />
                     </div>
                     <div className={'control'}>
-                        <Field name="endPoint" placeholder={"End Point"} />
-                        <ErrorMessage name="endPoint" />
+                        <Field type="text"  name="endPoint" placeholder={"End Point"} />
+                        <ErrorMessage className={"error"} name="endPoint" />
                     </div>
                     <div className={"flex-display mt-55"}>
-                        <button type={'submit'} className={"btn-primary"} value={'Save'}/>
-                        <button type={'button'} className={"btn-secondary"} value={'Cancel'} onClick={() => {
+                        <button type={'submit'} className={"btn-primary"}>Save</button>
+                        <button type={'button'} className={"btn-secondary"} onClick={() => {
                             props.closeModal()
-                        }}/>
+                        }}>Cancel
+                        </button>
                     </div>
                 </Form>
             )}

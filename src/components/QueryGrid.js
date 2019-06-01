@@ -30,7 +30,7 @@ const QueryGrid = (props) => {
         {queries.map((query, index) => (
                 <div key={index}>
                     <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
-                    <button onClick={() => {
+                    <button className={"btn-primary"} onClick={() => {
                         props.saveAnnotatedQuery(query);
                     }}>Annotate</button>
                 </div>

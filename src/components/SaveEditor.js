@@ -10,8 +10,8 @@ const querySchema = Yup.object().shape({
 });
 
 const SaveEditor = (props) => (
-    <div>
-        <h1>Save Query</h1>
+    <div className={"modal-container"}>
+        <h2 className={"modal-header"}>Save Query</h2>
         <Formik
             initialValues={{
                 queryName: '',
@@ -25,23 +25,27 @@ const SaveEditor = (props) => (
             {({ errors, touched }) => (
                 <Form>
                     <div>
-                        Query Name <Field name="queryName"  />
+                        <Field className={"mt-10"} type="text" name="queryName" placeholder="Query Name" />
                         <ErrorMessage name="queryName" />
                     </div>
                     <div>
-                        Description <Field name="description" component="textarea" />
+                        <Field type="text" className={"mt-10"} placeholder="Description" name="description" component="textarea" />
                     </div>
                     <div>
-                        Page <Field name="page" />
+                        <Field type="text" className={"mt-10"} placeholder="page" name="page" />
                     </div>
-                    <button type="submit">Submit</button>
+                    <div className={"flex-display mt-20"}>
+                        <button type={'submit'} className={"btn-primary"}>Submit</button>
+                        <button type={'button'} className={"btn-secondary"} onClick={() => {
+                            props.closeModal()
+                        }}>Cancel
+                        </button>
+                    </div>                    
                 </Form>
             )}
         </Formik>
         <div>
-            <button type={'button'} className={"btn-secondary"} onClick={() => {
-                props.closeModal();
-            }}>Cancel</button>
+            
         </div>
     </div>
 );

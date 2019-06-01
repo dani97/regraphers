@@ -176,6 +176,8 @@ input[type="text"] {
 
 .modal-container textarea {
     width: 95%;
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
 }
 
 .mt-55 {
@@ -361,6 +363,10 @@ input[type="text"] {
 
 .mt-10 {
     margin-top: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
 }
 
 .mt-10.section-title {
