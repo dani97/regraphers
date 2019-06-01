@@ -56,6 +56,7 @@ function WireFrameEditor (props) {
                         text: value
                     }
                 })}
+                annotatedQuery={props.annotatedQuery}
                 value={props.annotation.data && props.annotation.data.text}
             />
         </Container>
