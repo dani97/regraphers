@@ -37,7 +37,6 @@ const Button = styled.div`
   }
 `
 
-let queryPaths = [];
 const escapeRegexCharacters = (str) => {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -81,10 +80,12 @@ function createJsonPath(pathString, key,parentValue)  {
     }
 }
 
-let suggestionValue = '';
+let suggestionValue = '',
+    queryPaths = [];
 
 class TextEditor extends React.Component
 {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -94,11 +95,12 @@ class TextEditor extends React.Component
 
     componentDidMount() {
         if(this.props.annotatedQuery) {
-            let queryJson = this.props.annotatedQuery;
+            let queryJson = JSON.parse(this.props.annotatedQuery.query_string || '[]');
 
             if(queryJson.hasOwnProperty('__variables')) {
                 delete(queryJson['__variables']);
             }
+            queryPaths = [];
             for(let key in queryJson) {
                 console.log('key is ', key);
                 if(key !== '__args') {
@@ -180,9 +182,4 @@ class TextEditor extends React.Component
     }
 }
 
-
-export default connect(
-    state => ({
-       annotatedQuery: (state.query) ? JSON.parse(state.query.query_string || '[]') : null
-    })
-)(TextEditor);
+export default TextEditor;

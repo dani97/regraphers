@@ -11,7 +11,6 @@ export const ListEndPointOperations = gql`
                 graphql_query
                 page
                 name
-                
             }
         }
     }

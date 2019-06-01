@@ -25,6 +25,7 @@ const ExploreGrid = (props) => {
                 {queryTypes.map((type, index) => (
                         <label className = {"query-type secondary-card"} htmlFor={type} key={index} onClick={() => {
                             props.saveQueryType(type);
+                            props.routerProps.history.push('/queryBuilder');
                         }}>
                             <input type="radio" className={"hidden"} id={type} name={"query"}/>
                             <span className="radio-mark"/>
