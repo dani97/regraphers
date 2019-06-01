@@ -92,7 +92,7 @@ const QueryViewer = (props) => {
                        button if the copy command exists */
                     document.queryCommandSupported('copy') &&
                     <div>
-                        <button onClick={copyToClipboard}>Copy</button>
+                        <button className={"btn-secondary"} onClick={copyToClipboard}>Copy</button>
                         {copySuccess}
                     </div>
                 }
