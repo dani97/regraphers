@@ -12,22 +12,25 @@ export const getIntrospectionSchema = (endPoint) => {
         variables: {
             endPoint: endPoint
         },
-        fetchPolicy: "cache-first"
+        fetchPolicy: "no-cache"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }
 
 export const listEndPointOperations = (endPoint) => {
+    if(endPoint.slice(-1) != '/') {
+        endPoint = endPoint + '/';
+    }
     return AwsClient.query({
         query: ListEndPointOperations,
         variables: {
             "filter" :  {
                 "endpoint" : {
-                    "eq" : endPoint + '/'
+                    "eq" : endPoint
                 }
             }
         },
-        fetchPolicy: "cache-first"
+        fetchPolicy: "no-cache"
     })
         .then((response) => response);
 }
@@ -58,7 +61,7 @@ export const saveEndPointOperation = (endPoint) => {
         variables: {
             endPoint: endPoint
         },
-        fetchPolicy: "cache-only"
+        fetchPolicy: "no-cache"
     })
         .then((response) => JSON.parse(response.data.getIntrospectionSchema).data);
 }

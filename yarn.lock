@@ -1226,12 +1226,23 @@ ajv@^6.1.0, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+<<<<<<< HEAD
+amazon-cognito-identity-js@^3.0.12:
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-3.0.12.tgz#fd0086e8902ec32c0d6709ac61c851efbe1d07dc"
+  integrity sha512-fhbuZgaQbjOUt00RY3jhsFK55/ZYlgdx5dey2VB4YT5AW01mDiZiqhPKgLC5qd0JFr3x+c5gNhzNQaQGhq1rxw==
+  dependencies:
+    buffer "4.9.1"
+    crypto-js "^3.1.9-1"
+    js-cookie "^2.1.4"
+=======
 ansi-align@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
   integrity sha1-w2rsy6VjuJzrVW82kPCx2eNUf38=
   dependencies:
     string-width "^2.0.0"
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -1629,6 +1640,15 @@ aws-sdk@2.329.0:
     uuid "3.1.0"
     xml2js "0.4.19"
 
+<<<<<<< HEAD
+axios@^0.17.0:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
+  integrity sha1-LY4+XQvb1zJ/kbyBT1xXZg+Bgk0=
+  dependencies:
+    follow-redirects "^1.2.5"
+    is-buffer "^1.1.5"
+=======
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -1638,6 +1658,7 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 babel-loader@^8.0.5:
   version "8.0.6"
@@ -2368,10 +2389,17 @@ core-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
+<<<<<<< HEAD
+core-js@^2.4.0, core-js@^2.5.0:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
+  integrity sha512-HOpZf6eXmnl7la+cUdMnLvUxKNqLUzJvgIziQ0DiF3JwSImNphIqdGqzj6hIKyX04MmV0poclQ7+wjWvxQyR2A==
+=======
 core-js@^2.4.0:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.8.tgz#dc3a1e633a04267944e0cb850d3880f340248139"
   integrity sha512-RWlREFU74TEkdXzyl1bka66O3kYp8jeTXrvJZDzVVMH8AiHUSOFpL1yfhQJ+wHocAm1m+4971W1PPzfLuCv1vg==
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 core-js@^3.0.0:
   version "3.1.2"
@@ -2466,10 +2494,17 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+<<<<<<< HEAD
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+  integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
+=======
 crypto-random-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
   integrity sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 css-color-keywords@^1.0.0:
   version "1.0.0"
@@ -3266,7 +3301,16 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+<<<<<<< HEAD
+fn-name@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fn-name/-/fn-name-2.0.1.tgz#5214d7537a4d06a4a301c0cc262feb84188002e7"
+  integrity sha1-UhTXU3pNBqSjAcDMJi/rhBiAAuc=
+
+follow-redirects@^1.0.0, follow-redirects@^1.2.5:
+=======
 follow-redirects@^1.0.0:
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.7.0.tgz#489ebc198dc0e7f64167bd23b03c4c19b5784c76"
   integrity sha512-m/pZQy4Gj287eNy94nivy5wchN3Kp+Q5WgUPNy5lJSZ3sgkVKSYV/ZChMAQVIgx1SqfZ2zBZtPA2YlXIWxxJOQ==
@@ -6053,6 +6097,12 @@ prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.5.9,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
+<<<<<<< HEAD
+property-expr@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/property-expr/-/property-expr-1.5.1.tgz#22e8706894a0c8e28d58735804f6ba3a3673314f"
+  integrity sha512-CGuc0VUTGthpJXL36ydB6jnbyOf/rAHFvmVrJlH+Rg0DqqLFQGAP6hIaxD/G0OAmBJPhXDHuEJigrp0e0wFV6g==
+=======
 proto-list@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
@@ -6064,6 +6114,7 @@ protoduck@^5.0.1:
   integrity sha512-WxoCeDCoCBY55BMvj4cAEjdVUFGRWed9ZxPlqTKYyw1nDDTQ4pqmnIMAGfJlg7Dx35uB/M+PHJPTmGOvaCaPTg==
   dependencies:
     genfun "^5.0.0"
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 proxy-addr@~2.0.5:
   version "2.0.5"
@@ -6140,10 +6191,25 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+<<<<<<< HEAD
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  integrity sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=
+
+qrcode.react@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/qrcode.react/-/qrcode.react-0.8.0.tgz#413b31cc3b62910e39513f7bead945e01c4c34fb"
+  integrity sha512-16wKpuFvLwciIq2YAsfmPUCnSR8GrYPsXRK5KVdcIuX0+W/MKZbBkFhl44ttRx4TWZHqRjfztoWOxdPF0Hb9JA==
+  dependencies:
+    prop-types "^15.6.0"
+    qr.js "0.0.0"
+=======
 qrcode-terminal@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/qrcode-terminal/-/qrcode-terminal-0.12.0.tgz#bb5b699ef7f9f0505092a3748be4464fe71b5819"
   integrity sha512-EXtzRZmC+YGmGlDFbXKxQiMZNwCLEO6BANKXG4iCtSIM0yqc/pappSx3RIKr4r0uh5JsBckOXeKrB3Iz7mdQpQ==
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 qs@6.7.0:
   version "6.7.0"
@@ -7576,6 +7642,12 @@ toposort@^1.0.0:
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.7.tgz#2e68442d9f64ec720b8cc89e6443ac6caa950029"
   integrity sha1-LmhELZ9k7HILjMieZEOsbKqVACk=
 
+<<<<<<< HEAD
+toposort@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
+  integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
+=======
 tough-cookie@~2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.4.3.tgz#53f36da3f47783b0925afa06ff9f3b165280f781"
@@ -7583,6 +7655,7 @@ tough-cookie@~2.4.3:
   dependencies:
     psl "^1.1.24"
     punycode "^1.4.1"
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 trim-right@^1.0.1:
   version "1.0.1"
@@ -7781,12 +7854,23 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
+<<<<<<< HEAD
+url-loader@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-1.1.2.tgz#b971d191b83af693c5e3fea4064be9e1f2d7f8d8"
+  integrity sha512-dXHkKmw8FhPqu8asTc1puBfe3TehOCo2+RmOOev5suNCIYBcT626kxiWg1NBVkwc4rO8BGa7gP70W7VXuqHrjg==
+  dependencies:
+    loader-utils "^1.1.0"
+    mime "^2.0.3"
+    schema-utils "^1.0.0"
+=======
 url-parse-lax@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/url-parse-lax/-/url-parse-lax-1.0.0.tgz#7af8f303645e9bd79a272e7a14ac68bc0609da73"
   integrity sha1-evjzA2Rem9eaJy56FKxovAYJ2nM=
   dependencies:
     prepend-http "^1.0.1"
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 url-parse@^1.4.3:
   version "1.4.7"
@@ -8208,6 +8292,14 @@ yargs@^11.0.0:
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.1.0.tgz#90b869934ed6e871115ea2ff58b03f4724ed2d77"
   integrity sha512-NwW69J42EsCSanF8kyn5upxvjp5ds+t3+udGBeTbFnERA+lF541DDpMawzo4z6W/QrzNM18D+BPMiOBibnFV5A==
   dependencies:
+<<<<<<< HEAD
+    "@babel/runtime" "^7.0.0"
+    fn-name "~2.0.1"
+    lodash "^4.17.11"
+    property-expr "^1.5.0"
+    synchronous-promise "^2.0.6"
+    toposort "^2.0.2"
+=======
     cliui "^4.0.0"
     decamelize "^1.1.1"
     find-up "^2.1.0"
@@ -8220,6 +8312,7 @@ yargs@^11.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^9.0.2"
+>>>>>>> 29c6559e17550cdd0a1495336a432b299826dea2
 
 zen-observable-ts@^0.8.10, zen-observable-ts@^0.8.18:
   version "0.8.18"
