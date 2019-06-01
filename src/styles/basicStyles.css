@@ -524,6 +524,7 @@ input[type="number"] {
     margin-left: 30px;
     padding: 0;
     width: 90%;
+    border-right: none;
 }
 .saved-query .secondary-card-main h3{
     color: var(--primary-color);
@@ -539,7 +540,27 @@ input[type="number"] {
     padding: 43px;
     cursor: pointer;
     border-bottom-right-radius: 5px;
+    background-color: var(--secondary-color);
     height: auto;
+}
+
+.saved-query .secondary-card-actions .action.primary:hover {
+    background-color: var(--header-color);
+}
+
+.react-autosuggest__container--open div.react-autosuggest__suggestions-container {
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.react-autosuggest__container--open .react-autosuggest__input {
+    width: 380px;
+}
+
+span.name {
+    margin-left: 0px;
 }
 
 .btn-close-modal {
