@@ -7,8 +7,6 @@ import Message from "./Message";
 
 const projectSchema = Yup.object().shape({
     projectName: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
         .required('Required'),
     endPoint: Yup.string()
         .required('Required')
@@ -38,12 +36,10 @@ const CreateProject = (props) => (
                 <Form>
                     <Message/>
                     <div className={'control'}>
-                        <Field name="projectName" placeholder={"Project Name"}  />
-                        <ErrorMessage name="projectName" />
+                        <Field name="projectName" placeholder={"Project Name"} required={"required"} />
                     </div>
                     <div className={'control'}>
-                        <Field name="endPoint" placeholder={"End Point"} />
-                        <ErrorMessage name="endPoint" />
+                        <Field name="endPoint" placeholder={"End Point"} required={"required"} />
                     </div>
                     <div className={"flex-display mt-55"}>
                         <button type={'submit'} className={"btn-primary"} value={'Save'}/>

@@ -25,8 +25,7 @@ const SaveEditor = (props) => (
             {({ errors, touched }) => (
                 <Form>
                     <div>
-                        Query Name <Field name="queryName"  />
-                        <ErrorMessage name="queryName" />
+                        Query Name <Field name="queryName" required={"required"} />
                     </div>
                     <div>
                         Description <Field name="description" component="textarea" />

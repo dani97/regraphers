@@ -10,10 +10,13 @@ import WireFrame from '../components/WireFrame';
 import { Provider } from 'react-redux';
 import store from '../store';
 import LoaderComponent from './../components/LoaderComponent';
+import Logo from './../../images/graphql.png';
 
 const App = (props) => {
     return (
+        
         <div>
+            <a href={"/"}><img className={"logo"} src={Logo}/></a>
             <Provider store={store}>
             <LoaderComponent/>
                 <Switch>
