@@ -70,6 +70,9 @@ function createJsonPath(pathString, key,parentValue)  {
     pathString =  pathString + '_' + key;
 
     if(parentValue[key] == true) {
+        if(pathString.charAt(0) === '_') {
+            pathString = pathString.substr(1);
+        }
         queryPaths.push(pathString);
         return;
     }

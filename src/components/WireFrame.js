@@ -54,7 +54,7 @@ class WireFrame extends Component {
                         "input": {
                             "query_id": (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
                             "image_url": "https://wi-images.condecdn.net/image/d91Wlky6Pw3/crop/810/f/googleandroidfine.jpg",
-                            "annotation": this.state.annotations
+                            "annotation": (this.state.annotations) ? JSON.stringify(this.state.annotations) : '[]'
                         }
                     }
                     console.log('payload ', payload);
