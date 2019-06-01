@@ -40,8 +40,12 @@ const QueryViewer = (props) => {
 
     const copyToClipboard = (event) => {
         let textContent = queryViewerRef.current.textContent,
+        textArea = document.getElementById("resultJsonText");
+        if(!textArea) {
             textArea = document.createElement('textarea');
-
+            textArea.setAttribute("id", "resultJsonText");
+            textArea.setAttribute("class", "no-visible");
+        }
         textArea.textContent = textContent;
         document.body.append(textArea);
         textArea.select();
@@ -92,7 +96,7 @@ const QueryViewer = (props) => {
                        button if the copy command exists */
                     document.queryCommandSupported('copy') &&
                     <div>
-                        <button onClick={copyToClipboard}>Copy</button>
+                        <button className={"btn-secondary"} onClick={copyToClipboard}>Copy</button>
                         {copySuccess}
                     </div>
                 }
