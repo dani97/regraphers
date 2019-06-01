@@ -29,7 +29,7 @@ const QueryTester = (props) => {
             }
         }
         else {
-            initialValues[arg.name] = '';
+            initialValues[arg.name] = {};
         }
     });
 

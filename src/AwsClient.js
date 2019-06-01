@@ -1,11 +1,17 @@
-import AWSAppSyncClient from "aws-appsync";
-import AwsExports from "./AwsExports";
+import awsExports from './AwsExports';
+import AWSAppSyncClient from 'aws-appsync';
+import {Auth} from 'aws-amplify';
+import 'babel-polyfill';
 
-export const AwsClient = new AWSAppSyncClient({
-    url: AwsExports.aws_appsync_graphqlEndpoint,
-    region: AwsExports.aws_appsync_region,
+const AwsClient = new AWSAppSyncClient({
+    url: awsExports.aws_appsync_graphqlEndpoint,
+    region: awsExports.aws_appsync_region,
     auth: {
-        type: AwsExports.aws_appsync_authenticationType,
-        apiKey: AwsExports.aws_appsync_apiKey
-    }
+        type: awsExports.aws_appsync_authenticationType,
+        jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
+    },
+    disableOffline: true,
+    complexObjectsCredentials: () => Auth.currentCredentials()
 });
+
+export default AwsClient;

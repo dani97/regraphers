@@ -1,4 +1,4 @@
-import { AwsClient } from "../AwsClient";
+import  AwsClient from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import ResponseMutation from '../graphQL/ResponseMutation';
 import {buildClientSchema} from "graphql";
