@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { listEndPointOperations } from "../services/project";
 import { saveAnnotatedQuery } from "../actions/query";
 import Modal from "react-awesome-modal";
-import SaveEditor from "./SaveEditor";
-import Message from "./Message";
-import QueryTester from "./QueryTester";
+import AwsExports from '../AwsExports';
+import Amplify, { Auth } from 'aws-amplify';
+import {v4 as uuid } from 'uuid';
+
+Amplify.configure(AwsExports);
 
 const QueryGrid = (props) => {
 
@@ -19,6 +20,51 @@ const QueryGrid = (props) => {
 
     const onCloseModal= () => {
         setVisible(false);
+    }
+
+    const handleFileChange = (fileInput) => {
+        if(fileInput && fileInput.length > 0) {
+            let selectedFile = fileInput[0];
+            (async () => {
+                let file;
+                console.log("input", fileInput);
+                if (selectedFile) { // selectedFile is the file to be uploaded, typically comes from an <input type="file" />
+                    const {type: mimeType} = selectedFile;
+                    const name = selectedFile.name;
+                    const extension = /([^.]+)(\.(\w+))?$/.exec(name)[3];
+                    console.log(extension);
+                    const bucket = AwsExports.aws_user_files_s3_bucket;
+                    const region = AwsExports.aws_user_files_s3_bucket_region;
+                    const visibility = 'public';
+                    const {identityId} = await Auth.currentCredentials();
+
+                    const key = `${visibility}/${identityId}/${uuid()}${extension && '.'}${extension}`;
+
+                    file = {
+                        bucket,
+                        key,
+                        region,
+                        mimeType,
+                        localUri: selectedFile
+                    };
+                    console.log("selected file", file, extension);
+                }
+
+                client.mutate({
+                    mutation: gql(createTodo),
+                    variables: {
+                        input: {
+                            name: 'Upload file',
+                            description: 'Uses complex objects to upload',
+                            file: file,
+                        }
+                    }
+                }).then((result) => {
+                    console.log(result)
+                });
+
+            })();
+        }
     }
 
     console.log('in query gris props ', props);
@@ -50,6 +96,9 @@ const QueryGrid = (props) => {
                         <div>
                             <h3>{query.name}</h3>
                             <p>{query.description}</p>
+                        </div>
+                        <div>
+                            <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files)} />
                         </div>
                     </div>
                     <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
