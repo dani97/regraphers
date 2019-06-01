@@ -19,7 +19,6 @@ export const saveProject = (project, routerProps) => {
                     dispatch(createProject(project, schema));
                     if(routerProps && routerProps.history) {
                         console.log('history exister');
-                        dispatch(showLoader(false));
                         routerProps.history.push('/explore');
                     }
                 },

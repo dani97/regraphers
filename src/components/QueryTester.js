@@ -37,7 +37,7 @@ const QueryTester = (props) => {
         [visible, setVisible] = useState(false);
 
     const onOpenModal = () => {
-        console.log('into open modal in query tester');
+        console.log('into open modal in wireFrame tester');
         setVisible(true);
     }
 
@@ -78,6 +78,7 @@ const QueryTester = (props) => {
             <Formik
                 initialValues={initialValues}
                 onSubmit= {(values) => {
+                        props.showLoader(true);
                         console.log('values are ', values);
                       //  let query = "query cmsPage($id : Int) { cmsPage(id: $id) { content } }";
                         //    values = "{ \"id\": 3}";
@@ -87,7 +88,11 @@ const QueryTester = (props) => {
                             if(result && result.data && result.data.executeGraphqlOperation) {
                                 setGraphQLResult(result.data.executeGraphqlOperation);
                             }
-                        });
+                            props.showLoader(false);
+                        },
+                           error => {
+                                props.showLoader(false);
+                       });
                     }
                 }>
                 {({

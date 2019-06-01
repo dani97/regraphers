@@ -8,9 +8,10 @@ import Modal from "react-awesome-modal";
 import Message from "./Message";
 import QueryTester from './QueryTester';
 import SaveEditor from './SaveEditor';
-import { Link } from 'react-router-dom';
+import {showLoader} from "../actions/loader";
 
 function combineQueryArgs(query, args, queryType) {
+    console.log(query, args, queryType);
     if(!(Object.keys(query).length === 0
         && query.constructor === Object)) {
         query = {"query": query};
@@ -74,7 +75,8 @@ const QueryViewer = (props) => {
     }
 
     const handleSave = (queryValues) => {
-        console.log("query to be saved" , queryValues);
+        props.showLoader(true);
+        console.log("wireFrame to be saved" , queryValues);
         const payload = {
                 "endpoint": props.endPoint+'/',
                 "query_string": JSON.stringify(props.query),
@@ -86,8 +88,12 @@ const QueryViewer = (props) => {
         console.log('payload is ', payload);
         createEndPointOperation(payload).then((result) => {
             console.log(result);
+            props.showLoader(false);
             onSaveCloseModal();
             props.routerProps.history.push('/queries');
+        },
+            error => {
+                props.showLoader(false);
         });
     }
     return (
@@ -107,7 +113,7 @@ const QueryViewer = (props) => {
             <button className={"btn-primary btn-test"} onClick={onOpenModal}> Test </button>
             <Modal visible={visible} width="1000" height="550" effect="fadeInUp" onClickAway={onCloseModal}>
                 <Message/>
-                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} />
+                <QueryTester closeModal={onCloseModal} args={props.args} endPoint={props.endPoint} query={queryHtml} showLoader={props.showLoader} />
             </Modal>
 
             <button className={"btn-secondary btn-save"} onClick={onSaveOpenModal}> Save </button>
@@ -122,5 +128,6 @@ export default connect(
     state => ({
         endPoint: state.project.endPoint,
         queryType: state.queryType
-    })
+    }),
+    {showLoader}
 )(QueryViewer);

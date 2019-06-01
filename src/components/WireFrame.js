@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Annotation from 'react-image-annotation';
 import WireFrameEditor from './WireFrameEditor';
-import { createAnnotatedQueries } from "../services/project";
+import { createAnnotations } from "../services/project";
 import {connect} from "react-redux";
 
 class WireFrame extends Component {
@@ -37,7 +37,7 @@ class WireFrame extends Component {
         return (
             <div>
                 <Annotation
-                    src='https://wi-images.condecdn.net/image/d91Wlky6Pw3/crop/810/f/googleandroidfine.jpg'
+                    src={this.props.image_url}
                     alt='Two pebbles anthropomorphized holding hands'
                     annotations={this.state.annotations}
                     type={this.state.type}
@@ -51,14 +51,11 @@ class WireFrame extends Component {
                     )}/>
                 <button type={'submit'} className={"btn-primary"} value={'Save'} onClick={() => {
                     let payload = {
-                        "input": {
-                            "query_id": (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
-                            "image_url": "https://wi-images.condecdn.net/image/d91Wlky6Pw3/crop/810/f/googleandroidfine.jpg",
-                            "annotation": (this.state.annotations) ? JSON.stringify(this.state.annotations) : '[]'
-                        }
+                        query_id: (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
+                        annotationsList: (this.state.annotations) ? JSON.stringify(this.state.annotations) : '[]'
                     }
                     console.log('payload ', payload);
-                    createAnnotatedQueries(payload).then((result) =>  {
+                    createAnnotations(payload).then((result) =>  {
                         console.log('result is ', result);
                     })
                 }}/>
@@ -69,6 +66,7 @@ class WireFrame extends Component {
 
 export default connect(
     state => ({
-        annotatedQuery: (state.query) ? state.query : null
+        annotatedQuery : (state.wireFrame && state.wireFrame.query) ? state.wireFrame.query : {},
+        image_url: (state.wireFrame && state.wireFrame.image_url) ? state.wireFrame.image_url : null
     })
 )(WireFrame);
