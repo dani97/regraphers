@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import TextEditor from './TextEditor'
+// import TextEditor from './TextEditor'
 
 const fadeInScale = keyframes`
   from {
@@ -42,23 +42,23 @@ function WireFrameEditor (props) {
                 ...props.style
             }}
         >
-            <TextEditor
-                onChange={value => props.onChange({
-                    ...props.annotation,
-                    data: {
-                        ...props.annotation.data,
-                        text: value
-                    }
-                })}
-                onSubmit={value => props.onSubmit({
-                    ...props.annotation,
-                    data: {
-                        ...props.annotation.data,
-                        text: value
-                    }
-                })}
-                value={props.annotation.data && props.annotation.data.text}
-            />
+            {/*<TextEditor*/}
+            {/*    onChange={value => props.onChange({*/}
+            {/*        ...props.annotation,*/}
+            {/*        data: {*/}
+            {/*            ...props.annotation.data,*/}
+            {/*            text: value*/}
+            {/*        }*/}
+            {/*    })}*/}
+            {/*    onSubmit={value => props.onSubmit({*/}
+            {/*        ...props.annotation,*/}
+            {/*        data: {*/}
+            {/*            ...props.annotation.data,*/}
+            {/*            text: value*/}
+            {/*        }*/}
+            {/*    })}*/}
+            {/*    value={props.annotation.data && props.annotation.data.text}*/}
+            {/*/>*/}
         </Container>
     )
 }

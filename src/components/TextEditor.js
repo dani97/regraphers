@@ -89,19 +89,19 @@ const renderSuggestion = (suggestion, { query }) => {
     </span>
     );
 }
-
-const createJsonPath = (pathString, key, parentValue) => {
-
-    pathString =  pathString + '.' + key;
-
-    if(parentValue[key] == true) {
-        queryPaths.push(pathString);
-        return;
-    }
-    for(const childKey in parentValue[key]) {
-        createJsonPath(pathString, childKey, parentValue[key]);
-    }
-}
+//
+// const createJsonPath = (pathString, key, parentValue) => {
+//
+//     pathString =  pathString + '.' + key;
+//
+//     if(parentValue[key] == true) {
+//         queryPaths.push(pathString);
+//         return;
+//     }
+//     for(const childKey in parentValue[key]) {
+//         createJsonPath(pathString, childKey, parentValue[key]);
+//     }
+// }
 
 class TextEditor extends React.Component
 {
@@ -117,17 +117,17 @@ class TextEditor extends React.Component
             ? this.props.annotatedQuery.query_string
             : null;
         console.log('query string is ', queryString);
-        if(queryString) {
-            let queryJson = JSON.parse(queryString);
-            console.log('query json ', queryJson);
-            for(let key in queryJson) {
-                createJsonPath('', key, queryJson)
-            }
-             console.log('query path after ', queryPaths);
-            // this.setState({
-            //     suggestions: queryPaths
-            // });
-        }
+        // if(queryString) {
+        //     let queryJson = JSON.parse(queryString);
+        //     console.log('query json ', queryJson);
+        //     for(let key in queryJson) {
+        //         createJsonPath('', key, queryJson)
+        //     }
+        //      console.log('query path after ', queryPaths);
+        //     // this.setState({
+        //     //     suggestions: queryPaths
+        //     // });
+        // }
 
     }
 
