@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { jsonToGraphQLQuery, VariableType } from 'json-to-graphql-query';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { createEndPointOperation} from "../services/project";
 import {connect} from "react-redux";
 import Modal from "react-awesome-modal";
@@ -95,8 +97,8 @@ const QueryViewer = (props) => {
                     /* Logical shortcut for only displaying the
                        button if the copy command exists */
                     document.queryCommandSupported('copy') &&
-                    <div>
-                        <button className={"btn-secondary"} onClick={copyToClipboard}>Copy</button>
+                    <div className={"copy-status"}>
+                        <button className={"btn-secondary copy-json"} onClick={copyToClipboard}><FontAwesomeIcon icon={faCopy}/></button>
                         {copySuccess}
                     </div>
                 }
