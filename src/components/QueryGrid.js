@@ -122,11 +122,16 @@ const QueryGrid = (props) => {
                     <div className={"secondary-card-actions"}>
                         <input type='file' name='file'  onChange={(event) => handleFileChange(event.target.files, query)} />
                     </div>
-                    <Modal visible={visible[index]} width="1000" height="550" effect="fadeInUp" onClickAway={() => onCloseModal(index)}>
-                        <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
-                        <button type={'button'} className={"btn-secondary"} onClick={() => {
-                            onCloseModal(index);
-                        }}>Cancel</button>
+                    <Modal visible={visible[index]} width="800" height="450" effect="fadeInUp" onClickAway={() => onCloseModal(index)}>
+                        <div className={"modal-container"}>
+                            <h2 className={"modal-header"}>Your Query</h2>
+                            <div className={"test-sample-response"}>
+                                <pre dangerouslySetInnerHTML={{__html: query.graphql_query}}></pre>
+                            </div>
+                            <button type={'button'} className={"btn-secondary fixed-right close"} onClick={() => {
+                                onCloseModal(index);
+                            }}>X</button>
+                        </div>
                     </Modal>
                 </div>
                 )
