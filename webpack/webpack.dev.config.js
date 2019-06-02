@@ -40,8 +40,9 @@ module.exports = {
         // New plugin
         new HtmlWebpackPlugin({
           // injects bundle.js to our new index.html
-          inject: true,
-          // copys the content of the existing index.html to the new /build index.html
+            inject: true,
+            favicon: parentDir + "/images/graphql.png",
+            // copys the content of the existing index.html to the new /build index.html
           template:  path.resolve('./index.html'),
         }),
     ]
