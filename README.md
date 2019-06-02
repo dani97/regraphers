@@ -11,7 +11,7 @@ run `yarn install`
 
 run `yarn dev` (watching frontend application)
 
-## TO run production build
+## To run production build
 
 run `yarn build`  
 
