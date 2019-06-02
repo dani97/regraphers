@@ -57,6 +57,8 @@ class WireFrame extends Component {
                     console.log('payload ', payload);
                     createAnnotations(payload).then((result) =>  {
                         console.log('result is ', result);
+                        console.log('props are ', this.props);
+                        this.props.routerProps.history.push('/queries');
                     })
                 }}>Save</button>
             </div>
