@@ -102,7 +102,7 @@ const QueryViewer = (props) => {
                 {
                     /* Logical shortcut for only displaying the
                        button if the copy command exists */
-                    document.queryCommandSupported('copy') &&
+                    props.query && document.queryCommandSupported('copy') &&
                     <div className={"copy-status"}>
                         <button className={"btn-secondary copy-json"} onClick={copyToClipboard}><FontAwesomeIcon icon={faCopy}/></button>
                         {copySuccess}

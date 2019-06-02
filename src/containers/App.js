@@ -36,7 +36,7 @@ const App = (props) => {
                                 <Route exact path={"/queryBuilder"} render={(props) => <QueryBuilder routerProps={props}/>} />
                                 <Route exact path={"/queries"} render={(props) => <QueryGrid routerProps={props} />} />
                                 <Route exact path={"/page"} component={Page} />
-                                <Route exact path={"/wireFrame"} render={() => <WireFrame />} />
+                                <Route exact path={"/wireFrame"} render={(props) => <WireFrame routerProps={props} />} />
                             </Switch>
                         </Provider>
                     </div>
