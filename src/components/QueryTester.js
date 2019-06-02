@@ -106,7 +106,7 @@ const QueryTester = (props) => {
                       /* and other goodies */
                   }) => (
                     <form className={"args-form"} onSubmit={handleSubmit}>
-                        <h3 className={"mb-20 mt-0"}>Args List</h3>
+                        <h3 className={"mb-20 mt-0"}>Arguments</h3>
                         {
                             props.args.map((arg,index) => (
                                 <Fragment key={index}>

@@ -27,11 +27,11 @@ const QueryTreeBuilder = (props) => {
     return(
         <div className={"sections-container darker-bg"}>
             <div className={"half height-500"}>
-                <h2 className={"mt-10 section-title"}>Fields selector</h2>
+                <h2 className={"mt-10 section-title"}>Select Fields</h2>
                 <TreeCheckBox schema = {treeData} handleQueryChange={(query) => {formatQueryToTree(query)}}/>
             </div>
             <div className={"half height-500"}>
-                <h2 className={"mt-10 section-title"}>Result JSON Structure</h2>
+                <h2 className={"mt-10 section-title"}>GraphQL Query</h2>
                 <QueryViewer query = {query} args={args} endPoint={props.endPoint} routerProps={props.routerProps}/>
             </div>
         </div>
