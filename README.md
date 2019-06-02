@@ -1,17 +1,26 @@
-# graphql-project
+# Regraphers
 Graphql project for zilker hack fest
 
-clone the project 
+- clone the project 
+
+## To install dependencies
 
 run `yarn install`
 
 ## To run the project
 
-run `yarn watch:backend` (watching backend application)
+run `yarn dev` (watching frontend application)
 
-In separate console 
-run `yarn watch:frontend` (watching frontend application)
+## TO run production build
 
-## TO add dependencies
+run `yarn build`  
 
-run `yarn workspace <workspace-name> add <dependency-name>`  
+
+## About the project
+
+- All services are graphql based
+- Serverless / Cloud based services for backend
+- AWS appsync - front layer 
+- AWS Lambda service (Proxy - service ) & dynamoDB - CRUD Storage (non structured)
+- Amazon Cognito for user management - user pool created across multiple APIs
+- React Redux for frontend development
