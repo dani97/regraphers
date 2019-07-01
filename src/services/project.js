@@ -6,6 +6,9 @@ import { CreateEndPointOperation } from "../graphQL/EndPointOperation";
 import { ListEndPointOperations } from "../graphQL/ListEndPointOperations";
 import { CreateWireFrameMutation } from "../graphQL/CreateWireFrameMutation";
 import { CreateAnnotationsMutation } from "../graphQL/CreateAnnotationsMutation";
+import listAnnotationsQuery from "../graphQL/ListAnnotationsQuery";
+import listWireFrameQuery from "../graphQL/ListWireFrameQuery";
+import updateAnnotationsListMutation from "../graphQL/UpdateAnnotationMutation";
 
 export const getIntrospectionSchema = (endPoint) => {
     return AwsClient.query({
@@ -35,6 +38,37 @@ export const listEndPointOperations = (endPoint) => {
     })
         .then((response) => response);
 }
+export const listAnnotations = (queryId) => {
+    console.log(queryId);
+    return AwsClient.query({
+        query: listAnnotationsQuery,
+        variables: {
+            "queryId" : queryId
+        },
+        fetchPolicy: "no-cache"
+    }).then( (response) => response.data['listAnnotations']);
+}
+
+export const updateAnnotationsList = (id) => {
+    return AwsClient.mutate({
+        mutation: updateAnnotationsListMutation,
+        variables: {
+            "input": id
+        },
+        fetchPolicy:"no-cache"
+    }).then((response) => response);
+}
+
+export const listWireFrame = (queryId) => {
+    return AwsClient.query({
+        query: listWireFrameQuery,
+        variables: {
+            "queryId": queryId
+        },
+        fetchPolicy: "no-cache"
+    }).then((response) => response.data['listWireFrames']);
+};
+
 
 export const createEndPointOperation = (CreateEndPointInput) => {
     return AwsClient.mutate({
@@ -199,3 +233,7 @@ const createSchemaTree = (schema, schemaTree, field, parentName = '') => {
     }
     return;
 }
+
+
+
+

@@ -17,6 +17,7 @@ import {Rehydrated} from 'aws-appsync-react';
 import Amplify , { Auth } from 'aws-amplify';
 import AwsClient from '../AwsClient';
 import AwsExports from "../AwsExports";
+import EditWireFrame from '../components/EditWireFrame';
 
 Amplify.configure(AwsExports);
 
@@ -37,6 +38,7 @@ const App = (props) => {
                                 <Route exact path={"/queries"} render={(props) => <QueryGrid routerProps={props} />} />
                                 <Route exact path={"/page"} component={Page} />
                                 <Route exact path={"/wireFrame"} render={(props) => <WireFrame routerProps={props} />} />
+                                <Route exact path={"/wireFrame/:queryId"} render={(props) => <EditWireFrame routerProps={props} />}/>
                             </Switch>
                         </Provider>
                     </div>
