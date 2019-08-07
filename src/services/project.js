@@ -1,7 +1,6 @@
 import  AwsClient from "../AwsClient";
 import QueryIntrospectionSchema from '../graphQL/QueryIntrospectionSchema';
 import ResponseMutation from '../graphQL/ResponseMutation';
-import {buildClientSchema} from "graphql";
 import { CreateEndPointOperation } from "../graphQL/EndPointOperation";
 import { ListEndPointOperations } from "../graphQL/ListEndPointOperations";
 import { CreateWireFrameMutation } from "../graphQL/CreateWireFrameMutation";
@@ -74,6 +73,7 @@ export const getGraphQLOperationPayload = (endPoint, query, values) => ({
 })
 
 export const createAnnotations = (payload) => {
+    console.log("test payload",payload);
     return AwsClient.mutate({
         mutation: CreateAnnotationsMutation,
         variables: {

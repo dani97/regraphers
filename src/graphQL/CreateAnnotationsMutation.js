@@ -4,8 +4,8 @@ export const CreateAnnotationsMutation = gql`
     mutation createAnnotations($input: CreateAnnotationsInput!) {
       createAnnotations(input: $input) {
        id
-       query_id
-       annotationsList
+       queryID
+       annotationList
       }
     }
 `;

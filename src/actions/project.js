@@ -26,6 +26,7 @@ export const saveProject = (project, routerProps) => {
                     console.log('this is error ', error);
                     dispatch(showMessage(getMessage(ENDPOINT_ERROR_MESSAGE, ERROR_TYPE)));
                     dispatch(showLoader(false));
+                    //routerProps.history.push('/explore');
                   });
     }
 };

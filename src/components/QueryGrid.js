@@ -59,7 +59,6 @@ const QueryGrid = (props) => {
                     console.log("selected file", file, extension);
                 }
                 let payload = {
-                    id: new Date().getTime(),
                     query_id: query.id,
                     file
                 }

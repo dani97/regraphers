@@ -2,28 +2,27 @@
 
 const AwsExports = {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:b1db10ba-06eb-4439-a2e6-c3508da7bdfb",
+    "aws_cognito_identity_pool_id": "us-east-1:acc66bf0-e047-4c79-8849-bb45808e81e7",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_HS8Xpv9pT",
-    "aws_user_pools_web_client_id": "5k0ie3nklkuaekbe09mg25drqm",
+    "aws_user_pools_id": "us-east-1_Bi0Nmx0V0",
+    "aws_user_pools_web_client_id": "24qko6m7oco27pcofi6dg1r6m9",
     "oauth": {
-        "domain": "regraphers-regraphers.auth.us-east-1.amazoncognito.com",
+        "domain": "regraphers.auth.us-east-1.amazoncognito.com",
         "scope": [
-            "phone",
             "email",
             "openid",
-            "profile",
-            "aws.cognito.signin.user.admin"
+            "aws.cognito.signin.user.admin",
+            "profile"
         ],
         "redirectSignIn": "https://google.com/",
         "redirectSignOut": "https://google.com/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",
-    "aws_appsync_graphqlEndpoint": "https://pallfqrzqfa45gdgtcpi7x6er4.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://qzfysucpyjfvzeogqa26riqyu4.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_user_files_s3_bucket": "regraphers-regraphers",
+    "aws_user_files_s3_bucket": "regraphers",
     "aws_user_files_s3_bucket_region": "us-east-1"
 };
 

@@ -51,8 +51,8 @@ class WireFrame extends Component {
                     )}/>
                 <button type={'submit'} className={"btn-primary mt-15 ml-30"} value={'Save'} onClick={() => {
                     let payload = {
-                        query_id: (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
-                        annotationsList: (this.state.annotations) ? JSON.stringify(this.state.annotations) : '[]'
+                        queryID: (this.props.annotatedQuery) ? this.props.annotatedQuery.id : '',
+                        annotationList: (this.state.annotations) ? JSON.stringify(this.state.annotations) : '[]'
                     }
                     console.log('payload ', payload);
                     createAnnotations(payload).then((result) =>  {
